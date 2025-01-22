@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogick
+namespace DataAccess.Interfaces
 {
-    internal class Program
+    public interface IEntity
     {
-        static void Main(string[] args)
-        {
-        }
+        public int Id { get; set; }
     }
 }
