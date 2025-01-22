@@ -2,7 +2,7 @@
 using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace EntiryFramework_test_3
+namespace DataAccess
 {
     public class CinemaContext : DbContext
     {
