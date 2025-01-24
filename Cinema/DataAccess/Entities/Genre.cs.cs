@@ -13,7 +13,6 @@ namespace DataAccess.Entities
     public class Genre : IEntity
     {
         public int Id { get; set; }
-        [Column("GenreName")]
         public string GenreNameString { get; private set; }
 
         [NotMapped]
