@@ -2,10 +2,12 @@
 using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.Configurations;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DataAccess
 {
-    public class CinemaContext : DbContext
+    public class CinemaContext : IdentityDbContext<User>
     {
         public DbSet<Genre> Genres { get; set; }
         public DbSet<GenreMovie> MovieGenres {  get; set; }

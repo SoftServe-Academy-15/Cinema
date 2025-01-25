@@ -14,6 +14,6 @@ namespace DataAccess.Entities
 
         public int PlaceColumnNumber { get; set; }
 
-        public int UserId { get; set; }
+        public User UserId { get; set; }
     }
 }
