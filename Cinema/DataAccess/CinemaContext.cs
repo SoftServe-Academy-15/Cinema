@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities;
 using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
+using DataAccess.Configurations;
 
 namespace DataAccess
 {
@@ -21,18 +22,11 @@ namespace DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.ApplyConfiguration(new GenreMovieConfiguration());
+            modelBuilder.ApplyConfiguration(new GenreConfiguration());
+            modelBuilder.ApplyConfiguration(new MovieConfiguration());
 
-            modelBuilder.Entity<GenreMovie>().HasKey(gm => new { gm.MovieId, gm.GenreId });
-            modelBuilder.Entity<GenreMovie>()
-                .HasOne<Genre>(gm => gm.Genre)
-                .WithMany(g => g.Movies)
-                .HasForeignKey(gm => gm.GenreId);
-
-
-            modelBuilder.Entity<GenreMovie>()
-                .HasOne<Movie>(gm => gm.Movie)
-                .WithMany(g => g.Genres)
-                .HasForeignKey(gm => gm.MovieId);
             modelBuilder.SeedGenreList();
             modelBuilder.SeedMovieList();
         }
