@@ -10,6 +10,7 @@ namespace DataAccess
         public DbSet<Genre> Genres { get; set; }
         public DbSet<GenreMovie> MovieGenres {  get; set; }
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<CinemaHall> CinemaHalls { get; set; }
         public CinemaContext()
         {
             Database.EnsureDeleted();
@@ -26,9 +27,10 @@ namespace DataAccess
             modelBuilder.ApplyConfiguration(new GenreMovieConfiguration());
             modelBuilder.ApplyConfiguration(new GenreConfiguration());
             modelBuilder.ApplyConfiguration(new MovieConfiguration());
+            modelBuilder.ApplyConfiguration(new CinemaHallConfiguration());
 
             modelBuilder.SeedGenreList();
-            modelBuilder.SeedMovieList();
+            modelBuilder.SeedMovieList()
         }
 
     }
