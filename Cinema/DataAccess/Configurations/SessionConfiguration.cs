@@ -26,7 +26,7 @@ namespace DataAccess.Configurations
                 .IsRequired();
 
             // Field HallId: ForeignKey to Hall
-            builder.HasOne<Hall>()
+            builder.HasOne<CinemaHall>()
                 .WithMany()
                 .HasForeignKey(s => s.HallId)
                 .OnDelete(DeleteBehavior.Cascade); // Remove all related sessions when Hall is deleted
