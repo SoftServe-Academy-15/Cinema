@@ -30,7 +30,7 @@ namespace DataAccess
             modelBuilder.ApplyConfiguration(new CinemaHallConfiguration());
 
             modelBuilder.SeedGenreList();
-            modelBuilder.SeedMovieList()
+            modelBuilder.SeedMovieList();
         }
 
     }
