@@ -3,3 +3,12 @@
 ################################################################################
 
 /Cinema/DataAccess/obj
+*.targets
+*.cache
+*.txt
+*.editorconfig
+*.json
+*.props
+/Cinema/WebApp/obj/Debug/net8.0
+/Cinema/BusinessLogic/obj/Debug/net8.0
+/Cinema/.vs
