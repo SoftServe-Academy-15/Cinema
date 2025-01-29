@@ -1,15 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using DataAccess.Entities.Enums;
 using DataAccess.Interfaces;
 
-namespace DataAccess.Entities
+namespace DataAccess.Entities.MovieInformation
 {
-    public enum GenresEnum
-    {
-        Undefined,
-        Action,
-        Thriller,
-        Mysteries
-    }
     public class Genre : IEntity
     {
         public int Id { get; set; }
@@ -18,22 +12,16 @@ namespace DataAccess.Entities
         [NotMapped]
         private GenresEnum _genreName;
         [NotMapped]
-        public GenresEnum GenreName { get { return _genreName; } 
-            set 
-            { 
+        public GenresEnum GenreName
+        {
+            get { return _genreName; }
+            set
+            {
                 GenreNameString = Enum.GetName(typeof(GenresEnum), value);
                 _genreName = value;
-            } 
+            }
         }
         public List<GenreMovie> Movies { get; set; }
 
-    }
-    public class GenreMovie
-    {
-        public int MovieId { get; set; }
-        public Movie Movie { get; set; }
-
-        public int GenreId { get; set; }
-        public Genre Genre { get; set; }
     }
 }

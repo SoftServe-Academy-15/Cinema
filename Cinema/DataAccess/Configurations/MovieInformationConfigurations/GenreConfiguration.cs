@@ -1,8 +1,8 @@
-using DataAccess.Entities;
+using DataAccess.Entities.MovieInformation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccess.Configurations
+namespace DataAccess.Configurations.MovieInformationConfigurations
 {
     public class GenreConfiguration : IEntityTypeConfiguration<Genre>
     {

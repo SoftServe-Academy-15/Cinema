@@ -1,4 +1,5 @@
 ﻿using DataAccess.Entities;
+using DataAccess.Entities.MovieInformation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
