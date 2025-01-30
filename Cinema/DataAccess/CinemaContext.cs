@@ -40,7 +40,6 @@ namespace DataAccess
 
             modelBuilder.SeedGenreList();
             modelBuilder.SeedMovieList();
-
         }
 
     }
