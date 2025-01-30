@@ -1,10 +1,10 @@
 ﻿using DataAccess.Entities;
-using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.Configurations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using DataAccess.Entities.MovieInformation;
 using DataAccess.Configurations.MovieInformationConfigurations;
+using DataAccess.Extencions.Data;
 
 namespace DataAccess
 {
