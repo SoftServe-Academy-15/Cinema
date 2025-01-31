@@ -50,5 +50,14 @@ namespace DataAccess.Entities.Specifications
                     .Include(x => x.Genres).Include(x => x.Actors);
             }
         }
+        public class ByName : Specification<Movie> 
+        {
+            public ByName(string name) 
+            {
+                Query.
+                    Where(x => x.Title == name)
+                    .Include(x => x.Genres).Include(x => x.Actors);
+            }
+        }
     }
 }

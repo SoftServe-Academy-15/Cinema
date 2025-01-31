@@ -18,5 +18,6 @@ namespace BusinessLogic.Interfaces.Services
         List<MovieDTO> GetMoviesByActors(List<ActorDTO> ActorDTOs);
         List<GenreDTO> GetAllGenres(int id);
         List<MovieDTO> GetAllMovies();
+        List<MovieDTO> GetMoviesByName(string name);
     }
 }

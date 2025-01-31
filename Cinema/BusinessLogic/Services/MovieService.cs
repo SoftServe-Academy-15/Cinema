@@ -35,6 +35,13 @@ namespace BusinessLogic.Services
             _movieRepository.Save();
         }
 
+        public void UpdateMovie(MovieDTO movieDTO)
+        {
+            var movie = _mapper.Map<Movie>(movieDTO);
+            _movieRepository.Update(movie);
+            _movieRepository.Save();
+        }
+
         public List<GenreDTO> GetAllGenres(int id)
         {
             var result = _genreRepository.GetAll();
@@ -69,11 +76,10 @@ namespace BusinessLogic.Services
             var result = _movieRepository.GetListBySpec(new MovieSpecification.ByActors(actorsIds));
             return _mapper.Map<List<MovieDTO>>(result);
         }
-        public void UpdateMovie(MovieDTO movieDTO)
+        public List<MovieDTO> GetMoviesByName(string name)
         {
-            var movie = _mapper.Map<Movie>(movieDTO);
-            _movieRepository.Update(movie);
-            _movieRepository.Save();
+            var result = _movieRepository.GetListBySpec(new MovieSpecification.ByName(name));
+            return _mapper.Map<List<MovieDTO>>(result);
         }
     }
 }
