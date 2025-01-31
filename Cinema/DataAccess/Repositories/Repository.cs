@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Ardalis.Specification;
+using Ardalis.Specification.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using DataAccess.Interfaces;
 
 namespace DataAccess.Repositories
@@ -53,6 +55,21 @@ namespace DataAccess.Repositories
         public void Save()
         {
             context.SaveChanges();
+        }
+
+        public IEnumerable<TEntity> GetListBySpec(ISpecification<TEntity> specification)
+        {
+            return ApplySpecification(specification).ToList();
+        }
+
+        public TEntity? GetFirstBySpec(ISpecification<TEntity> specification)
+        {
+            return ApplySpecification(specification).FirstOrDefault();
+        }
+        private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
+        {
+            var evaluator = new SpecificationEvaluator();
+            return evaluator.GetQuery(dbSet, specification);
         }
     }
 }

@@ -1,13 +1,11 @@
-﻿using DataAccess.Interfaces;
-
-namespace DataAccess.Entities.MovieInformation
+﻿namespace BusinessLogic.DTOs
 {
-    public class Actor : IEntity
+    public class ActorDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public ushort BirthYear { get; set; }
-        public List<MovieActor> Movies { get; set; }
+        public List<RoleDTO> Roles { get; set; }
     }
 }

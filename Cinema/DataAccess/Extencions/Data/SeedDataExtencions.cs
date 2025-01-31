@@ -2,7 +2,7 @@
 using DataAccess.Entities.MovieInformation;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.Data
+namespace DataAccess.Extencions.Data
 {
     public static class SeedData
     {
@@ -34,4 +34,4 @@ namespace DataAccess.Data
             //});
         }
     }
-} 
+}

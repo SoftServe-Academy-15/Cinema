@@ -12,5 +12,7 @@ namespace DataAccess.Entities.MovieInformation
         public Movie Movie { get; set; }
         public int ActorId { get; set; }
         public Actor Actor { get; set; }
+        public string Role {  get; set; }
+        public bool IsMainRole { get; set; }
     }
 }
