@@ -2,20 +2,24 @@
 using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.Configurations;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using DataAccess.Entities.MovieInformation;
+using DataAccess.Configurations.MovieInformationConfigurations;
 
 namespace DataAccess
 {
     public class CinemaContext : IdentityDbContext<User>
     {
+        public DbSet<Movie> Movies { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<GenreMovie> MovieGenres {  get; set; }
-        public DbSet<Movie> Movies { get; set; }
+        public DbSet<Actor> Actors { get; set; }
+        public DbSet<MovieActor> MovieActors { get; set; }
         public DbSet<CinemaHall> CinemaHalls { get; set; }
+        public DbSet<Session> Sessions { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
         public CinemaContext()
         {
-            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -28,8 +32,11 @@ namespace DataAccess
             
             modelBuilder.ApplyConfiguration(new GenreMovieConfiguration());
             modelBuilder.ApplyConfiguration(new GenreConfiguration());
+            modelBuilder.ApplyConfiguration(new ActorConfiguration());
+            modelBuilder.ApplyConfiguration(new MovieActorConfiguration());
             modelBuilder.ApplyConfiguration(new MovieConfiguration());
             modelBuilder.ApplyConfiguration(new CinemaHallConfiguration());
+            modelBuilder.ApplyConfiguration(new SessionConfiguration());
 
             modelBuilder.SeedGenreList();
             modelBuilder.SeedMovieList();

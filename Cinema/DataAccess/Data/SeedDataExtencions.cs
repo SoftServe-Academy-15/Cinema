@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities;
+﻿using DataAccess.Entities.Enums;
+using DataAccess.Entities.MovieInformation;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Data

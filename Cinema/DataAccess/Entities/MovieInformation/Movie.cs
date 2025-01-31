@@ -1,6 +1,6 @@
 ﻿using DataAccess.Enteties;
 
-namespace DataAccess.Entities
+namespace DataAccess.Entities.MovieInformation
 {
     public class Movie : IEntity
     {
@@ -8,8 +8,8 @@ namespace DataAccess.Entities
         public string Title { get; set; }
         public string Description { get; set; }
         public string TrailerLink { get; set; }
-        public string Cast { get; set; }
         public float Rating { get; set; }
+        public List<MovieActor> Actors { get; set; }
         public List<GenreMovie> Genres { get; set; }
     }
 }
