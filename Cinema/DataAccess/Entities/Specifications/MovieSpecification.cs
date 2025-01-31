@@ -55,7 +55,7 @@ namespace DataAccess.Entities.Specifications
             public ByName(string name) 
             {
                 Query.
-                    Where(x => x.Title == name)
+                    Where(x => x.Title.StartsWith(name))
                     .Include(x => x.Genres).Include(x => x.Actors);
             }
         }
