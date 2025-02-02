@@ -1,4 +1,4 @@
-﻿using DataAccess.Enteties;
+﻿using DataAccess.Interfaces;
 
 namespace DataAccess.Entities
 {

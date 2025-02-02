@@ -1,54 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using BusinessLogic.DTOs;
 using BusinessLogic.Interfaces.Services;
+using BusinessLogic.Services.Base;
+using DataAccess.Entities.MovieInformation;
+using DataAccess.Entities.Specifications;
+using DataAccess.Interfaces;
 
 namespace BusinessLogic.Services
 {
-    public class ActorService : IActorService
+    public class ActorService : BaseServiceClass<Actor, ActorDTO>, IActorService
     {
-        public void AddActor(ActorDTO actorDTO)
+        public ActorService(IMapper mapper, IRepository<Actor> repository) : base(mapper, repository)
         {
-
-        }
-
-        public void DeleteActor(int actorId)
-        {
-            IMovieService movieService = null;
-            throw new NotImplementedException();
         }
 
         public ActorDTO GetActorById(int id)
         {
-            throw new NotImplementedException();
+            var result = Repository.GetFirstBySpec(new ActorSpecifications.ById(id));
+            return Mapper.Map<ActorDTO>(result);
         }
 
         public List<ActorDTO> GetActorsByIds(int[] ids)
         {
-            throw new NotImplementedException();
+            var result = Repository.GetFirstBySpec(new ActorSpecifications.ByIds(ids));
+            return Mapper.Map<List<ActorDTO>>(result);
         }
 
         public List<ActorDTO> GetActorsByMovie(MovieDTO movie)
         {
-            throw new NotImplementedException();
+            var result = Repository.GetFirstBySpec(new ActorSpecifications.ByMovie(movie.Id));
+            return Mapper.Map<List<ActorDTO>>(result);
         }
 
-        public List<ActorDTO> GetActorsByName()
+        public List<ActorDTO> GetActorsByName(string name)
         {
-            throw new NotImplementedException();
-        }
-
-        public List<ActorDTO> GetAllActors()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateActor(ActorDTO actorDTO)
-        {
-            throw new NotImplementedException();
+            var result = Repository.GetFirstBySpec(new ActorSpecifications.ByName(name));
+            return Mapper.Map<List<ActorDTO>>(result);
         }
     }
 }

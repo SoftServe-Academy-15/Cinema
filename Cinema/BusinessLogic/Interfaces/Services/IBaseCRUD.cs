@@ -1,5 +1,4 @@
-﻿using DataAccess.Interfaces;
-namespace BusinessLogic.Interfaces.Services
+﻿namespace BusinessLogic.Interfaces.Services
 {
     public interface IBaseCRUD <T_DTO> 
         where T_DTO : class

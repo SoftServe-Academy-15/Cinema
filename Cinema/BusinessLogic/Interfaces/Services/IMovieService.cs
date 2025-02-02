@@ -1,5 +1,4 @@
 ﻿using BusinessLogic.DTOs;
-using DataAccess.Entities.MovieInformation;
 
 namespace BusinessLogic.Interfaces.Services
 {

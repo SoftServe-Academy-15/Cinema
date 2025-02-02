@@ -1,5 +1,4 @@
-﻿using DataAccess.Entities.Enums;
-using DataAccess.Entities.MovieInformation;
+﻿using DataAccess.Entities.MovieInformation;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Extencions.Data
@@ -8,13 +7,13 @@ namespace DataAccess.Extencions.Data
     {
         public static void SeedGenreList(this ModelBuilder modelBuilder)
         {
-            GenresEnum[] genres = Enum.GetValues(typeof(GenresEnum)).Cast<GenresEnum>().ToArray();
-            Genre[] genreList = new Genre[genres.Length];
-            for (int i = 0; i < genres.Length; i++)
-            {
-                genreList[i] = new Genre() { Id = i + 1, GenreName = genres[i] };
-            }
-            modelBuilder.Entity<Genre>().HasData(genreList);
+            //GenresEnum[] genres = Enum.GetValues(typeof(GenresEnum)).Cast<GenresEnum>().ToArray();
+            //Genre[] genreList = new Genre[genres.Length];
+            //for (int i = 0; i < genres.Length; i++)
+            //{
+            //    genreList[i] = new Genre() { Id = i + 1, GenreName = genres[i] };
+            //}
+            //modelBuilder.Entity<Genre>().HasData(genreList);
         }
         public static void SeedMovieList(this ModelBuilder modelBuilder)
         {
