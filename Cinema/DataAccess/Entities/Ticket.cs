@@ -1,4 +1,4 @@
-﻿using DataAccess.Enteties;
+﻿using DataAccess.Interfaces;
 
 namespace DataAccess.Entities
 {
@@ -7,6 +7,7 @@ namespace DataAccess.Entities
         public int Id { get; set; }
 
         public int SessionId { get; set; }
+        public Session Session { get; set; }  // Navigation property
 
         public float Price { get; set; }
 
@@ -14,6 +15,11 @@ namespace DataAccess.Entities
 
         public int PlaceColumnNumber { get; set; }
 
+<<<<<<< Updated upstream
         public int UserId { get; set; }
+=======
+        public string UserId { get; set; }  // Foreign key
+        public User User { get; set; }  // Navigation property
+>>>>>>> Stashed changes
     }
 }
