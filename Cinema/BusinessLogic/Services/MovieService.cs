@@ -3,14 +3,12 @@ using BusinessLogic.DTOs;
 using BusinessLogic.Interfaces.Services;
 using DataAccess.Interfaces;
 using DataAccess.Entities.MovieInformation;
-using System.Drawing;
-using System.Numerics;
 using DataAccess.Entities.Specifications;
 using BusinessLogic.Services.Base;
 
 namespace BusinessLogic.Services
 {
-    internal class MovieService : BaseServiceClass<Movie, MovieDTO>, IMovieService
+    public class MovieService : BaseServiceClass<Movie, MovieDTO>, IMovieService
     {
         public MovieService(IMapper mapper, IRepository<Movie> repository) : base(mapper, repository)
         {

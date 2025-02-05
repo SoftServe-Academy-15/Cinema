@@ -7,7 +7,7 @@ namespace DataAccess.Extencions.EntityExtencions
     {
         public static bool ContainsAllGenres(this Movie movie, List<string> genresNames) 
         {
-            return genresNames.Intersect<string>(movie.Genres.Select(e => e.Genre.GenreNameString)).Count<string>() == genresNames.Count;
+            return genresNames.Intersect<string>(movie.Genres.Select(e => e.Genre.GenreName)).Count<string>() == genresNames.Count;
         }
         public static bool ContainsAllActors(this Movie movie, List<int> actorIds)
         {

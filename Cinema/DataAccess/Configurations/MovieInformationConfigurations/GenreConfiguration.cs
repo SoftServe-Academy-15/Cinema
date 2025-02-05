@@ -10,8 +10,7 @@ namespace DataAccess.Configurations.MovieInformationConfigurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.GenreNameString).HasColumnName("GenreName");
-            builder.HasIndex(x => x.GenreNameString).IsUnique();
+            builder.HasIndex(x => x.GenreName).IsUnique();
 
         }
     }

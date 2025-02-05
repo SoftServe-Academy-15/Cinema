@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogic.DTOs;
 using BusinessLogic.Interfaces.Services;
-using DataAccess.Entities.MovieInformation;
 using DataAccess.Entities.Specifications;
 using DataAccess.Interfaces;
 

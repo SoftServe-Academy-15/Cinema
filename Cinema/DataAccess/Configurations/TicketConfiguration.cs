@@ -34,7 +34,6 @@ namespace DataAccess.Configurations
             builder.Property(t => t.PlaceColumnNumber)
                 .IsRequired();
 
-            // Required field
             builder.Property(t => t.UserId)
                 .IsRequired();
 
