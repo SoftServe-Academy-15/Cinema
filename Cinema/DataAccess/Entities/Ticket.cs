@@ -15,11 +15,7 @@ namespace DataAccess.Entities
 
         public int PlaceColumnNumber { get; set; }
 
-<<<<<<< Updated upstream
-        public int UserId { get; set; }
-=======
         public string UserId { get; set; }  // Foreign key
         public User User { get; set; }  // Navigation property
->>>>>>> Stashed changes
     }
 }
