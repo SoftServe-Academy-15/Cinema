@@ -29,16 +29,16 @@ namespace DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
             modelBuilder.ApplyConfiguration(new GenreMovieConfiguration());
             modelBuilder.ApplyConfiguration(new GenreConfiguration());
             modelBuilder.ApplyConfiguration(new ActorConfiguration());
             modelBuilder.ApplyConfiguration(new MovieActorConfiguration());
             modelBuilder.ApplyConfiguration(new MovieConfiguration());
-            modelBuilder.ApplyConfiguration(new CinemaHallConfiguration());
-            modelBuilder.ApplyConfiguration(new SessionConfiguration());
-
             modelBuilder.SeedGenreList();
+            modelBuilder.ApplyConfiguration(new CinemaHallConfiguration());
+            modelBuilder.ApplyConfiguration(new SessionConfiguration());         
+
             modelBuilder.SeedMovieList();
 
         }

@@ -1,0 +1,85 @@
+﻿
+@model WebApp.Views.Movies.MovieAddViewModel
+<h1>Input movie information</h1>
+<form asp-action="Add" id="AddMovieForm" method="post">
+	@* <div>
+		<label asp-for="Movie.Title">Title</label>
+		<input asp-for="Movie.Title">
+		<span asp-validation-for="Movie.Title"></span>
+	</div>
+	<div>
+		<label asp-for="Movie.Description">Description</label>
+		<input asp-for="Movie.Description">
+		<span asp-validation-for="Movie.Description"></span>
+	</div>
+	<div>
+		<label asp-for="Movie.Year">Year</label>
+		<input asp-for="Movie.Year" type="number">
+		<span asp-validation-for="Movie.Year"></span>
+	</div>
+	<div>
+		<label asp-for="Movie.Rating">Rating</label>
+		<input asp-for="Movie.Rating" type="number">
+		<span asp-validation-for="Movie.Rating"></span>
+	</div>
+	<div>
+		<label asp-for="Movie.TrailerLink">TrailerLink</label>
+		<input asp-for="Movie.TrailerLink" type="url">
+		<span asp-validation-for="Movie.TrailerLink"></span>
+	</div>
+	<div>
+		<label asp-for="Movie.ThumbnailLink">ThumbnailLink</label>
+		<input asp-for="Movie.ThumbnailLink" type="url">
+		<span asp-validation-for="Movie.ThumbnailLink"></span>
+	</div> *@
+	<div id="AddingGenreContainer">
+		<label for="Genres">Genres</label>
+		<div class="GenreListContainer"></div>
+		<span for="Genres"></span>
+		<div id="AddedGenresContainer">
+		</div>
+		<button id="addGenre" type="button">+</button>
+		<div id="genreListContainer">
+			@foreach (var genre in Model.Genres)
+			{
+			<button class="genreButton" , id="@genre.GenreName" type="button", action="">@genre.GenreName</button>
+			}
+		</div>
+	</div>
+		<div>
+			<button type="submit">Add</button>
+		</div>
+</form>
+
+@section Scripts
+{
+    <script type="text/javascript">
+			$("#addGenre").click(function()
+		{
+			if(document.getElementById("genreListContainer").style.display != "block"){
+				document.getElementById("genreListContainer").style.display = "block";
+			}
+			else{
+				document.getElementById("genreListContainer").style.display = "none";
+			}
+		});
+		
+		var genreButtons = document.getElementsByClassName("genreButton");
+
+		for(var i = 0; i < genreButtons.length; i++){
+			genreButtons[i].addEventListener("click", 
+			function (e){
+				console.log(typeof e);
+				console.log(typeof e.target);
+				if(e.target.parentElement.id == "genreListContainer")
+				{
+					document.getElementById("AddedGenresContainer").appendChild(e.target);
+				}
+				else
+				{
+					document.getElementById("genreListContainer").appendChild(e.target);
+				}
+			});
+		}
+	</script>
+}
