@@ -1,17 +1,25 @@
 ﻿using DataAccess.Entities;
-using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
+using DataAccess.Configurations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using DataAccess.Entities.MovieInformation;
+using DataAccess.Configurations.MovieInformationConfigurations;
+using DataAccess.Extencions.Data;
 
 namespace DataAccess
 {
-    public class CinemaContext : DbContext
+    public class CinemaContext : IdentityDbContext<User>
     {
+        public DbSet<Movie> Movies { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<GenreMovie> MovieGenres {  get; set; }
-        public DbSet<Movie> Movies { get; set; }
+        public DbSet<Actor> Actors { get; set; }
+        public DbSet<MovieActor> MovieActors { get; set; }
+        public DbSet<CinemaHall> CinemaHalls { get; set; }
+        public DbSet<Session> Sessions { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
         public CinemaContext()
         {
-            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -22,18 +30,15 @@ namespace DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<GenreMovie>().HasKey(gm => new { gm.MovieId, gm.GenreId });
-            modelBuilder.Entity<GenreMovie>()
-                .HasOne<Genre>(gm => gm.Genre)
-                .WithMany(g => g.Movies)
-                .HasForeignKey(gm => gm.GenreId);
-
-
-            modelBuilder.Entity<GenreMovie>()
-                .HasOne<Movie>(gm => gm.Movie)
-                .WithMany(g => g.Genres)
-                .HasForeignKey(gm => gm.MovieId);
+            modelBuilder.ApplyConfiguration(new GenreMovieConfiguration());
+            modelBuilder.ApplyConfiguration(new GenreConfiguration());
+            modelBuilder.ApplyConfiguration(new ActorConfiguration());
+            modelBuilder.ApplyConfiguration(new MovieActorConfiguration());
+            modelBuilder.ApplyConfiguration(new MovieConfiguration());
             modelBuilder.SeedGenreList();
+            modelBuilder.ApplyConfiguration(new CinemaHallConfiguration());
+            modelBuilder.ApplyConfiguration(new SessionConfiguration());         
+
             modelBuilder.SeedMovieList();
         }
 
