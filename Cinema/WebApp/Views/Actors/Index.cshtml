@@ -1,0 +1,14 @@
+﻿@model List<BusinessLogic.DTOs.ActorDTO>
+@{
+	<div>
+		@foreach(var actor in Model){
+			<div>
+				<img src= @actor.PhotoUrl alt="photo" width="100" id="image" />
+				<br/>
+				<label>@(actor.Name + " " + actor.Surname)</label>
+				<br />
+				<label>@(actor.BirthYear)</label>
+			</div>
+		}
+	</div>
+}

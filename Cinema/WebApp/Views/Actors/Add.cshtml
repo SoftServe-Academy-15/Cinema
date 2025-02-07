@@ -1,0 +1,52 @@
+﻿@model BusinessLogic.DTOs.ActorDTO
+@{
+    const string imagePlaceholderUrl = "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png";
+}
+<h1>Input actor information</h1>
+	<form asp-action="Add" id="AddMovieForm" method="post", style="text-align: center">		
+	<div class="formRowContainer">
+		<label asp-for="Name">Name</label>
+		<input asp-for="Name">
+		<span asp-validation-for="Name"></span>
+	</div>
+	<div class="formRowContainer">
+		<label asp-for="Surname">Surname</label>
+		<input asp-for="Surname">
+		<span asp-validation-for="Surname"></span>
+	</div>
+	<div class="formRowContainer">
+		<label asp-for="BirthYear">BirthYear</label>
+		<input asp-for="BirthYear" type="number">
+		<span asp-validation-for="BirthYear"></span>
+	</div class="formRowContainer">
+	<div>
+		<label asp-for="PhotoUrl">PhotoUrl</label>
+		<input asp-for="PhotoUrl" type="url" id="PhotoUrl">
+		<span asp-validation-for="PhotoUrl"></span>
+	</div class="formRowContainer">
+	<div class="formRowContainer">
+            <img src="@imagePlaceholderUrl" alt="photo" width="100" id="image" />
+	</div>
+	<div style="margin-top: 5px; margin-bottom: 5px">
+			<button type="submit">Add</button>
+	</div>
+</form>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $("#PhotoUrl").change(function () {
+            const value = $(this).val();
+            setImage(value);
+        });
+
+        function setImage(imageUrl) {
+            if (imageUrl == '') {
+                imageUrl = '@imagePlaceholderUrl';
+            }
+            $("#image").attr('src', imageUrl);
+        }
+    </script>
+}
+
+

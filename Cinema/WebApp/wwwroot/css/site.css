@@ -8,10 +8,31 @@ html {
   }
 }
 
+form {
+    display: flex;
+    align-self: center;
+    align-content: center;
+    background-color: aliceblue;
+    border-color: black;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    flex: 0 1 0;
+    background-color: whitesmoke;
+    width: 50%;
+    text-align:center;
+}
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
+h1{
+    text-align:center;
+    color:snow;
 
+}
 html {
   position: relative;
   min-height: 100%;
@@ -23,19 +44,39 @@ body {
 
 #genreListContainer, #AddedGenresContainer {
     height: auto;
-    width: auto;
+    width:80%;
     max-width: 400px;
     margin: 10px;
     padding: 10px;
     border: 2px solid black;
     display: none;
 }
-#AddedGenresContainer 
-{
+#AddedGenresContainer {
     display: inline-block;
-    min-height: 20px;
+    min-height: 50px;
 }
-#genreButton {
-    margin: 5px;
-    padding: 5px;
+.addingContainer {
+    position: relative;
+}
+.genreButton {
+    margin: 2px 4px 2px 4px;
+    padding: 1px 1px 1px 1px;
+}
+.formLabel {
+    display: inline-block;
+}
+.addButton {
+    display: inline;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%)
+}
+.formRowContainer {
+    margin-left: auto;
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    padding: 5px 5px 5px 5px;
+    width: 100%;
 }

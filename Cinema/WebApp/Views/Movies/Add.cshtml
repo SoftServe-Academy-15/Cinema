@@ -1,5 +1,5 @@
 ﻿
-@model WebApp.Views.Movies.MovieAddViewModel
+@model MovieAddViewModel
 <h1>Input movie information</h1>
 <form asp-action="Add" id="AddMovieForm" method="post">
 	@* <div>
@@ -32,13 +32,15 @@
 		<input asp-for="Movie.ThumbnailLink" type="url">
 		<span asp-validation-for="Movie.ThumbnailLink"></span>
 	</div> *@
-	<div id="AddingGenreContainer">
-		<label for="Genres">Genres</label>
+	<div id="AddingGenreContainer" class="formRowContainer">
+		<label for="Genres" class="formLabel">Genres</label>
 		<div class="GenreListContainer"></div>
 		<span for="Genres"></span>
-		<div id="AddedGenresContainer">
+		<div class="addingContainer">
+			<div id="AddedGenresContainer">
+			</div>
+			<button id="addGenre" type="button" class="addButton">+</button>
 		</div>
-		<button id="addGenre" type="button">+</button>
 		<div id="genreListContainer">
 			@foreach (var genre in Model.Genres)
 			{
@@ -54,30 +56,45 @@
 @section Scripts
 {
     <script type="text/javascript">
+		//addGenre button click. It displays genre list. If list is already displayed - it will hede it
 			$("#addGenre").click(function()
 		{
-			if(document.getElementById("genreListContainer").style.display != "block"){
-				document.getElementById("genreListContainer").style.display = "block";
+			if(document.getElementById("genreListContainer").style.display != "inline-block"){
+				document.getElementById("genreListContainer").style.display = "inline-block";
 			}
 			else{
 				document.getElementById("genreListContainer").style.display = "none";
 			}
 		});
-		
+		//Supposed, that elements is already sorted in alphabetic order
+		function appendChildInAlphabeticOrder(parentElement, childElement){
+			if( parentElement.childElementCount == 0 ||
+			parentElement.children[parentElement.childElementCount - 1].textContent
+				.localeCompare(childElement.textContent) == -1
+			){
+				parentElement.appendChild(childElement);
+				return;
+			}
+			for(i = 0; i < parentElement.childElementCount; i++){
+					if(parentElement.children[i].textContent
+				.localeCompare(childElement.textContent) == 1){
+					parentElement.insertBefore(childElement, parentElement.children[i]);
+					return;
+				}
+			}
+		}
 		var genreButtons = document.getElementsByClassName("genreButton");
-
+		//Add genre to genre list
 		for(var i = 0; i < genreButtons.length; i++){
 			genreButtons[i].addEventListener("click", 
 			function (e){
-				console.log(typeof e);
-				console.log(typeof e.target);
 				if(e.target.parentElement.id == "genreListContainer")
 				{
-					document.getElementById("AddedGenresContainer").appendChild(e.target);
+					appendChildInAlphabeticOrder(document.getElementById("AddedGenresContainer"),e.target);
 				}
 				else
 				{
-					document.getElementById("genreListContainer").appendChild(e.target);
+					appendChildInAlphabeticOrder(document.getElementById("genreListContainer"),e.target);
 				}
 			});
 		}
