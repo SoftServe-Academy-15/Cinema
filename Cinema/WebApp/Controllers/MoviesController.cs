@@ -1,8 +1,7 @@
 ﻿using BusinessLogic.DTOs;
 using BusinessLogic.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using WebApp.Views.Movies;
+using WebApp.Models;
 
 namespace WebApp.Controllers
 {

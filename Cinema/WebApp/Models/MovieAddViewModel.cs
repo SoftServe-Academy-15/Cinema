@@ -1,7 +1,7 @@
 ﻿using BusinessLogic.DTOs;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebApp.Views.Movies
+namespace WebApp.Models
 {
     public class MovieAddViewModel : PageModel
     {

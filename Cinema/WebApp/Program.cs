@@ -1,4 +1,4 @@
-using BusinessLogic;
+using BusinessLogic.Extentions;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Services;
 using DataAccess;
@@ -23,6 +23,7 @@ builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IActorService, ActorService>();
 
 builder.Services.AddAutoMapper();
+
 builder.Services.AddValidators();
 
 var app = builder.Build(); 

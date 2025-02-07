@@ -11,7 +11,7 @@ namespace BusinessLogic.Helpers
             CreateMap<GenreDTO, Genre>().ReverseMap();
             CreateMap<RoleDTO, MovieActor>().ReverseMap();
             CreateMap<ActorDTO, Actor>().ReverseMap()
-                .ForMember(dest => dest.Roles, act => act.MapFrom(src => src.Movies)); ;
+                .ForMember(dest => dest.Roles, act => act.MapFrom(src => src.Movies));
             CreateMap<MovieDTO, Movie>().ReverseMap();
         }
     }
