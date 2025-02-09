@@ -12,3 +12,8 @@
 /Cinema/WebApp/obj/Debug/net8.0
 /Cinema/BusinessLogic/obj/Debug/net8.0
 /Cinema/.vs
+*.vsidx
+*.sqlite
+*.wsuo
+/Cinema/BusinessLogic/obj/Release/net8.0
+/Cinema/WebApp/obj/Release/net8.0
