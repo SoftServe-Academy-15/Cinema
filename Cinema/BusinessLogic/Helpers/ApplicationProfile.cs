@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogic.DTOs;
+using DataAccess.Entities;
 using DataAccess.Entities.MovieInformation;
 
 namespace BusinessLogic.Helpers
@@ -13,6 +14,7 @@ namespace BusinessLogic.Helpers
             CreateMap<ActorDTO, Actor>().ReverseMap()
                 .ForMember(dest => dest.Roles, act => act.MapFrom(src => src.Movies));
             CreateMap<MovieDTO, Movie>().ReverseMap();
+            CreateMap<CinemaHallDTO, CinemaHall>().ReverseMap();
         }
     }
 }
