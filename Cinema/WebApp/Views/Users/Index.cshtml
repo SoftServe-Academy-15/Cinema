@@ -1,0 +1,14 @@
+﻿@model List<BusinessLogic.DTOs.UserDTO>
+@{
+	<div>
+		@foreach(var user in Model){
+			<div>
+				<label>@(user.UserName)</label>
+				<br />
+				<label>@(user.Email)</label>
+				<br />
+				<label>@(user.IsAdmin? "Admin" : "User")</label>
+			</div>
+		}
+	</div>
+}
