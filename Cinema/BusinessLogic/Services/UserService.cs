@@ -5,6 +5,7 @@ using BusinessLogic.Services.Base;
 using DataAccess.Entities;
 using DataAccess.Entities.Specifications;
 using DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using static DataAccess.Entities.Specifications.UserSpecification;
 
 namespace BusinessLogic.Services
@@ -15,6 +16,24 @@ namespace BusinessLogic.Services
         {
         }
 
+        public UserDTO Authenticate(string email, string password)
+        {
+            var user = Repository.GetFirstBySpec(new UserSpecification.ByEmail(email));
+
+            if (user == null || !VerifyPassword(password, user.PasswordHash))
+                return null;
+
+            return new UserDTO
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                IsAdmin = user.IsAdmin
+            };
+        }
+        private bool VerifyPassword(string enteredPassword, string storedHash)
+        {
+            return (enteredPassword == storedHash);
+        }
         public UserDTO GetByEmail(string email)
         {
             var result = Repository.GetFirstBySpec(new UserSpecification.ByEmail(email));
