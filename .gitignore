@@ -11,4 +11,7 @@
 *.props
 /Cinema/WebApp/obj/Debug/net8.0
 /Cinema/BusinessLogic/obj/Debug/net8.0
+/Cinema/WebApp/bin/Debug/net8.0 
+/Cinema/BusinessLogic/bin/Debug/net8.0 
+/Cinema/DataAccess/bin/Debug/net8.0 
 /Cinema/.vs
