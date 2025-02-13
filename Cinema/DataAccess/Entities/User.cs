@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DataAccess.Interfaces;
 
 namespace DataAccess.Entities
 {
-    public class User : IdentityUser
+    public class User : IEntity
     {
-        public required Guid UserId { get; set; }
+        public int Id { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string PasswordHash { get; set; }
         public bool IsAdmin { get; set; }
     }
 }

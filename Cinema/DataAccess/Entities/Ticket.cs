@@ -14,8 +14,8 @@ namespace DataAccess.Entities
         public int PlaceRowNumber { get; set; }
 
         public int PlaceColumnNumber { get; set; }
-        
-        public Guid UserId { get; set; }  // Foreign key
-        public User User { get; set; }  // Navigation property
+
+        public int UserId { get; set; }  // Foreign Key
+        public User User { get; set; }   // Navigation Property
     }
 }

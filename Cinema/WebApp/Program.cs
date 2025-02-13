@@ -21,7 +21,7 @@ builder.Services.AddScoped<DbContext, CinemaContext>();
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IActorService, ActorService>();
-
+builder.Services.AddScoped<IUserService, UserServise>();
 builder.Services.AddAutoMapper();
 
 builder.Services.AddValidators();
