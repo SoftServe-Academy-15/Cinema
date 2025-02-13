@@ -22,7 +22,6 @@ public class AccountController : Controller
     public async Task<IActionResult> Login(UserLoginDTO model)
     {
         var user = _userService.Authenticate(model.Email, model.PasswordHash);
-
         if (user != null)
         {
             var claims = new List<Claim>
