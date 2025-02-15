@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogic.DTOs;
+using DataAccess.Entities;
 using DataAccess.Entities.MovieInformation;
 
 namespace BusinessLogic.Helpers

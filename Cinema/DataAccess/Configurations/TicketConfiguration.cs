@@ -16,7 +16,7 @@ namespace DataAccess.Configurations
                 .IsRequired();
 
             // Field SessionId: ForeignKey to Session
-            builder.HasOne<Session>()
+            builder.HasOne(t => t.Session)
                 .WithMany()
                 .HasForeignKey(t => t.SessionId)
                 .OnDelete(DeleteBehavior.Cascade); // Remove all related tickets when Session is deleted
@@ -34,13 +34,18 @@ namespace DataAccess.Configurations
             builder.Property(t => t.PlaceColumnNumber)
                 .IsRequired();
 
+            // Provide unique combination (SessionId, PlaceRowNumber, PlaceColumnNumber)
+            builder.HasIndex(t => new { t.SessionId, t.PlaceRowNumber, t.PlaceColumnNumber })
+                .IsUnique();
+
+            // Required field
             builder.Property(t => t.UserId)
                 .IsRequired();
 
             // Field UserId: ForeignKey to User
-            builder.HasOne<User>()
+            builder.HasOne(t => t.User)
                 .WithMany()
-                .HasForeignKey(s => s.UserId)
+                .HasForeignKey(t => t.UserId)
                 .OnDelete(DeleteBehavior.Cascade); // Remove all related tickets when User is deleted
         }
     }

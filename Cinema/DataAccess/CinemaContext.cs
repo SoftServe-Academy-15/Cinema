@@ -40,7 +40,6 @@ namespace DataAccess
             modelBuilder.ApplyConfiguration(new SessionConfiguration());         
 
             modelBuilder.SeedMovieList();
-
         }
 
     }
