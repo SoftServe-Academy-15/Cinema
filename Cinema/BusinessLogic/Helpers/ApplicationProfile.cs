@@ -11,6 +11,7 @@ namespace BusinessLogic.Helpers
         {
             CreateMap<Genre, GenreDTO>();
             CreateMap<RoleDTO, MovieActor>().ReverseMap();
+            CreateMap<CinemaHall, CinemaHallDTO>().ReverseMap();
             CreateMap<ActorDTO, Actor>()
                 .ForMember(dest => dest.Movies, act => act.MapFrom(src => src.Roles))
                 .ReverseMap();
