@@ -28,7 +28,17 @@ namespace DataAccess.Entities.Specifications
             public ByName(string name)
             {
                 Query.
-                    Where(x => x.GenreName.ToLower().StartsWith(name.ToLower()))
+                    Where(x => x.GenreName.ToLower() == name.ToLower())
+                    .Include(x => x.Movies);
+            }
+        }
+        public class ByNames : Specification<Genre>
+        {
+            public ByNames(string[] names)
+            {
+                names = names.ToList().ConvertAll(n => n.ToLower()).ToArray();
+                Query.
+                    Where(x => names.Contains(x.GenreName.ToLower()))
                     .Include(x => x.Movies);
             }
         }

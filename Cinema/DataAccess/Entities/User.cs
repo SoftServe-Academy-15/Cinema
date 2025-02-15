@@ -1,5 +1,4 @@
 ﻿using DataAccess.Interfaces;
-
 namespace DataAccess.Entities
 {
     public class User : IEntity

@@ -10,41 +10,61 @@ namespace WebApp.Controllers
         private readonly IMovieService _movieService;
         private readonly IGenreService _genreService;
         private readonly IActorService _actorService;
-        //GET: /Movies/Index or /Movies
+        private MovieAddViewModel _model;
         public MoviesController(IMovieService movieService, IGenreService genreService, IActorService actorService)
         {
             _movieService = movieService;
             _genreService = genreService;
             _actorService = actorService;
+            _model = new MovieAddViewModel();
+            _model.Genres = _genreService.GetAll();
         }
+        //GET: /Movies/Index or /Movies
         public IActionResult Index()
         {
-            return View(_movieService.GetAll());
+            List<MovieDTO> movies = _movieService.GetAll();
+            return View(movies);
         }
         //GET: /Movies/Add
         public IActionResult Add()
         {
-            Console.WriteLine("__________Add start_____________________");
-            MovieAddViewModel model = new MovieAddViewModel();
-            //model.Actors = _actorService.GetAll();
-            //model.Movie = new MovieDTO();
-            //model.Movie.Title = "asd";
-            //model.Movie.Id = 5;
-            //model.Movie.TrailerLink = "https://www.youtube.com" +
-            //    "/watch?v=aPDLCTcjbGI&list=RDaPDLCTcjbGI&start_radio=1" +
-            //    "&ab_channel=Neiro";
-            //model.Movie.ThumbnailLink = "https://pbs.twimg.com/profile_images/1243623122089041920/gVZIvphd_400x400.jpg";
-            //model.Movie.Year = 2000;
-            //model.Movie.Description = "asdgfasdf";
-            model.Genres = _genreService.GetAll();
-            return View(model);
+            //RoleDTO role = TempData["R"];
+            return View(_model);
         }
         //POST: /Movies/Add
         [HttpPost]
-        public IActionResult Add(MovieDTO movie)
+        public IActionResult Add(MovieAddViewModel data)
         {
+            Console.WriteLine(data.GenreString);
+
+            MovieDTO movie = data.Movie;
+
+            string[] genreNames = data.GenreString.Split(';');
+            movie.Genres = _genreService.GetByNames(genreNames);
+
+            movie.Roles = new List<RoleDTO>();
+            string[] actorNames = data.ActorNameString.Split(";");
+            string[] roleNames = data.RoleNameString.Split(";");
+            string[] mainRole = data.MainRoleString.Split(";");
+
+            Console.WriteLine(data.MainRoleString);
+            for (int i = 0; i < actorNames.Length-1; i++)
+            {
+                Console.WriteLine(mainRole[i]);
+                RoleDTO roleDTO = new RoleDTO();
+                roleDTO.ActorId = _actorService.GetActorByName(actorNames[i]).Id;
+                roleDTO.Role = roleNames[i];    
+                roleDTO.IsMainRole = mainRole[i] == "true";
+                movie.Roles.Add(roleDTO);
+            }
+
             _movieService.Create(movie);
-            return View();
+            return Ok(RedirectToAction(nameof(Index)));
+        }
+        [HttpPost]
+        public IActionResult AddRole(ActorDTO actor)
+        {
+            return RedirectToAction("Add");
         }
     }
 }

@@ -80,3 +80,21 @@ body {
     padding: 5px 5px 5px 5px;
     width: 100%;
 }
+.tableContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.tableNode{
+    height: 300px;
+    margin: 10px 5px 10px 5px;
+    width: 150px;
+}
+.nodeImage{
+    width: auto;
+    height: auto;
+    max-height: 200px;
+    max-width: 150px;
+}
+.inNodeInfo{
+    height: 270px;
+}

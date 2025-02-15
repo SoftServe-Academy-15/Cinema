@@ -1,7 +1,10 @@
+using BusinessLogic.DTOs;
 using BusinessLogic.Extentions;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Services;
+using BusinessLogic.Services.Base;
 using DataAccess;
+using DataAccess.Entities.MovieInformation;
 using DataAccess.Extencions;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +20,9 @@ builder.Services.AddDbContextFactory<CinemaContext>(options =>
         ?? throw new InvalidOperationException("Connection string not found.")));
 
 builder.Services.AddRepository();
+
 builder.Services.AddScoped<DbContext, CinemaContext>();
+//Services
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IActorService, ActorService>();
