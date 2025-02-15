@@ -16,12 +16,12 @@ namespace WebApp.Controllers
         {
             return View(_userService.GetAll());
         }
-        //GET: /Actors/Add
+
         public IActionResult Add()
         {
             return View();
         }
-        //POST: /Actors/Add
+
         [HttpPost]
         public IActionResult Add(UserDTO user)
         {

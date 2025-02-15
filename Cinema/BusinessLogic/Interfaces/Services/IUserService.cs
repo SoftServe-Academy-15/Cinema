@@ -9,6 +9,7 @@ namespace BusinessLogic.Interfaces.Services
         UserDTO GetByEmail(string email);
         List<UserDTO> GetByIds(int[] ids);
         UserDTO Authenticate(string username, string password);
-        //List<UserDTO> GetByRole(bool[] role);
+        UserDTO GetByRole(string role);
+        List<UserDTO> GetByRoles(string[] role);
     }
 }

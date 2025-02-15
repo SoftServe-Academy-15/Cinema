@@ -23,7 +23,7 @@ namespace WebApp.Controllers
         {
             return View();
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult AdminPage()
         {
             return View();
