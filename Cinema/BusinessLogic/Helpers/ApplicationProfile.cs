@@ -8,11 +8,17 @@ namespace BusinessLogic.Helpers
     {
         public ApplicationProfile()
         {
-            CreateMap<GenreDTO, Genre>().ReverseMap();
+            CreateMap<Genre, GenreDTO>();
             CreateMap<RoleDTO, MovieActor>().ReverseMap();
-            CreateMap<ActorDTO, Actor>().ReverseMap()
-                .ForMember(dest => dest.Roles, act => act.MapFrom(src => src.Movies));
-            CreateMap<MovieDTO, Movie>().ReverseMap();
+            CreateMap<ActorDTO, Actor>()
+                .ForMember(dest => dest.Movies, act => act.MapFrom(src => src.Roles))
+                .ReverseMap();
+            CreateMap<GenreDTO, GenreMovie>()
+            .ForMember(dest => dest.GenreId, act => act.MapFrom(src => src.Id))
+            .ReverseMap();
+            CreateMap<MovieDTO, Movie>()
+                    .ForMember(dest => dest.Actors, act => act.MapFrom(src => src.Roles))
+                    .ReverseMap();
         }
     }
 }

@@ -7,54 +7,58 @@ namespace DataAccess.Repositories
 {
     internal class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
     {
-        internal DbContext context;
-        internal DbSet<TEntity> dbSet;
+        private readonly DbContext _context;
+        private readonly DbSet<TEntity> _dbSet;
 
         public Repository(DbContext context)
         {
-            this.context = context;
-            this.dbSet = context.Set<TEntity>();
+            this._context = context;
+            this._dbSet = context.Set<TEntity>();
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            return dbSet.ToList();
+            return _dbSet.ToList();
         }
 
         public TEntity? GetById(int id)
         {
-            return dbSet.Find(id);
+            return _dbSet.Find(id);
         }
 
         public void Insert(TEntity entity)
         {
-            dbSet.Add(entity);
+            if(GetById(entity.Id) == null)
+            {
+                Console.WriteLine(entity);
+                _dbSet.Add(entity);
+            }
         }
 
         public void Delete(int id)
         {
-            TEntity? entity = dbSet.Find(id);
+            TEntity? entity = _dbSet.Find(id);
             if (entity != null) Delete(entity);
         }
 
-        public void Delete(TEntity entity)
+        private void Delete(TEntity entity)
         {
-            if (context.Entry(entity).State == EntityState.Detached)
+            if (_context.Entry(entity).State == EntityState.Detached)
             {
-                dbSet.Attach(entity);
+                _dbSet.Attach(entity);
             }
-            dbSet.Remove(entity);
+            _dbSet.Remove(entity);
         }
 
         public void Update(TEntity entity)
         {
-            dbSet.Attach(entity);
-            context.Entry(entity).State = EntityState.Modified;
+            _dbSet.Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public IEnumerable<TEntity> GetListBySpec(ISpecification<TEntity> specification)
@@ -69,7 +73,7 @@ namespace DataAccess.Repositories
         private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
         {
             var evaluator = new SpecificationEvaluator();
-            return evaluator.GetQuery(dbSet, specification);
+            return evaluator.GetQuery(_dbSet, specification);
         }
     }
 }

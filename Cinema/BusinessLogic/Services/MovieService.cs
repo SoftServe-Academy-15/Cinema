@@ -5,6 +5,7 @@ using DataAccess.Interfaces;
 using DataAccess.Entities.MovieInformation;
 using DataAccess.Entities.Specifications;
 using BusinessLogic.Services.Base;
+using Ardalis.Specification;
 
 namespace BusinessLogic.Services
 {
@@ -41,5 +42,10 @@ namespace BusinessLogic.Services
             var result = Repository.GetListBySpec(new MovieSpecification.ByName(name));
             return Mapper.Map<List<MovieDTO>>(result);
         }
+        //public override void Create(MovieDTO dto)
+        //{
+        //    var mov = Mapper.Map<Movie>(dto);
+        //    base.Create(dto);
+        //}
     }
 }

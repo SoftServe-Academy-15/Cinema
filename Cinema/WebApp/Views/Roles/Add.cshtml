@@ -1,0 +1,20 @@
+﻿@page
+@model WebApp.Models.RoleModel
+<h1>Input role information</h1>
+<img src="@Model.Actor.PhotoUrl" alt="photo" width="100" id="image" />
+<h2>@(Model.Actor.Name + " " + Model.Actor.Surname) </h2>
+<form asp-action=@($"AddRole") id="AddMovieForm" method="post" , style="text-align: center">
+	<div class="formRowContainer">
+		<label asp-for="RoleName">RoleName</label>
+		<input asp-for="RoleName">
+		<span asp-validation-for="RoleName"></span>
+	</div>
+	<div class="formRowContainer">
+		<label asp-for="IsMainRole">IsMainRole</label>
+		<input asp-for="IsMainRole" type="checkbox">
+		<span asp-validation-for="IsMainRole"></span>
+	</div>
+	<div style="margin-top: 5px; margin-bottom: 5px">
+		<button id="submitButton">Add</button>
+	</div>
+</form>

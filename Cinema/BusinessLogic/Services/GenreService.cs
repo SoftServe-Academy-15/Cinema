@@ -24,10 +24,20 @@ namespace BusinessLogic.Services
             return Mapper.Map<List<GenreDTO>>(result);
         }
 
-        public List<GenreDTO> GetByName(string name)
+        public GenreDTO GetByName(string name)
         {
-            var result = Repository.GetListBySpec(new GenreSpecifications.ByName(name));
+            var result = Repository.GetFirstBySpec(new GenreSpecifications.ByName(name));
+            return Mapper.Map<GenreDTO>(result);
+        }
+        public List<GenreDTO> GetByNames(string[] names)
+        {
+            var result = Repository.GetListBySpec(new GenreSpecifications.ByNames(names));
             return Mapper.Map<List<GenreDTO>>(result);
+        }
+        public override void Create(GenreDTO dto)
+        {
+            if(GetByName(dto.GenreName) == null)
+                base.Create(dto);
         }
     }
 }
