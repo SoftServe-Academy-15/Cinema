@@ -11,7 +11,7 @@
 	</div>
 	<div class="formRowContainer">
 		<label asp-for="Movie.Description">Description</label>
-		<input asp-for="Movie.Description" id="description">
+		<textarea id="description"></textarea>
 		<span asp-validation-for="Movie.Description"></span>
 	</div>
 	<div class="formRowContainer">
@@ -40,6 +40,7 @@
 		<input asp-for="ActorNameString" type="hidden" id="actorNameString">
 		<input asp-for="RoleNameString" type="hidden" id="roleNameString">
 		<input asp-for="MainRoleString" type="hidden" id="mainRoleString">
+		<input asp-for="Movie.Description" id="descriptionString">
 	</div>
 	<div id="AddingGenreContainer" class="formRowContainer">
 		<label for="Genres" class="formLabel">Genres</label>
@@ -172,6 +173,7 @@
 			let actorNameString = document.getElementById("actorNameString");
 			let roleNameString = document.getElementById("roleNameString");
 			let mainRoleString = document.getElementById("mainRoleString");
+			document.getElementById("descriptionString").value = document.getElementById("description").value;
 
 			genreString.value = "";
 			actorNameString.value = "";

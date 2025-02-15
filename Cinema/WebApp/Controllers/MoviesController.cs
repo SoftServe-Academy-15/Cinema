@@ -58,7 +58,7 @@ namespace WebApp.Controllers
                 movie.Roles.Add(roleDTO);
             }
 
-            _movieService.Create(movie);
+            //_movieService.Create(movie);
             return Ok(RedirectToAction(nameof(Index)));
         }
         [HttpPost]
