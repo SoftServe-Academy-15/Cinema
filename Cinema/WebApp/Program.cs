@@ -6,12 +6,20 @@ using BusinessLogic.Services.Base;
 using DataAccess;
 using DataAccess.Entities.MovieInformation;
 using DataAccess.Extencions;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 string connectionString = @"Server=(localdb)\mssqllocaldb;Database=CinemaDb;Trusted_Connection=True;";
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+    });
 
+builder.Services.AddSession();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -28,6 +36,7 @@ builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IActorService, ActorService>();
 builder.Services.AddScoped<ICinemaHallService, CinemaHallService>();
 
+builder.Services.AddScoped<IUserService, UserServise>();
 builder.Services.AddAutoMapper();
 
 builder.Services.AddValidators();
@@ -46,7 +55,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

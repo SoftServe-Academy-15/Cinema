@@ -1,10 +1,12 @@
-﻿using DataAccess.Entities.MovieInformation;
+﻿using DataAccess.Entities;
+using DataAccess.Entities.MovieInformation;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Extencions.Data
 {
     public static class SeedData
     {
+
         public static void SeedGenreList(this ModelBuilder modelBuilder)
         {
             //GenresEnum[] genres = Enum.GetValues(typeof(GenresEnum)).Cast<GenresEnum>().ToArray();
