@@ -8,6 +8,7 @@ namespace DataAccess.Entities
         public string UserName { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
-        public bool IsAdmin { get; set; }
+        public string Role { get; set; }
+        public UserRole UserRole { get; set; }
     }
 }
