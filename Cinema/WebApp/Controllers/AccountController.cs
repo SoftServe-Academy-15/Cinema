@@ -60,5 +60,10 @@ public async Task<IActionResult> Logout()
     {
         return View();
     }
+    [Authorize]
+    public IActionResult Profile()
+    {
+        return View();
+    }
 }
 

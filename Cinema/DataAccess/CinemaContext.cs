@@ -29,9 +29,12 @@ namespace DataAccess
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=CinemaDb;Trusted_Connection=True;TrustServerCertificate=True;");
-
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=CinemaDb;Trusted_Connection=True;");
         }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=CinemaDb;Trusted_Connection=True;TrustServerCertificate=True;");
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
