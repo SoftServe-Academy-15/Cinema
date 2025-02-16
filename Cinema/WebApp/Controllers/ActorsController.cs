@@ -50,9 +50,12 @@ namespace WebApp.Controllers
         public JsonResult GetActorByName(string name)
         {
             ActorDTO actor = _actorService.GetActorByName(name); 
-            for(int i = 0; i < actor.Roles.Count; i++)
+            if(actor != null)
             {
-                actor.Roles[i].Actor = null;
+                for (int i = 0; i < actor.Roles.Count; i++)
+                {
+                    actor.Roles[i].Actor = null;
+                }
             }
             return Json(actor);
         }

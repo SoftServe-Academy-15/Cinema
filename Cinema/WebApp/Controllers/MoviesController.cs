@@ -64,8 +64,8 @@ namespace WebApp.Controllers
                 movie.Roles.Add(roleDTO);
             }
 
-            //_movieService.Create(movie);
-            return Ok(RedirectToAction(nameof(Index)));
+            _movieService.Create(movie);
+            return RedirectToAction(nameof(Index));
         }
         [HttpPost]
         public IActionResult AddRole(ActorDTO actor)
