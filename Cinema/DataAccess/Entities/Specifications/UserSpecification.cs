@@ -11,7 +11,7 @@ namespace DataAccess.Entities.Specifications
            public All()
             {
                 Query
-                    .Include(x => x.Id).Include(x => x.UserName).Include(x => x.Role);
+                    .Include(x => x.Id).Include(x => x.UserName).Include(x => x.IsAdmin);
             }
         }
         public class ByIds : Specification<User>
@@ -46,21 +46,14 @@ namespace DataAccess.Entities.Specifications
                     .Where(x => x.UserName == userName);
             }
         }
-        public class ByRole : Specification<User>
-        {
-            public ByRole(string role)
-            {
-                Query
-                    .Where(x => x.Role == role);
-            }
-        }
-        public class ByRoles : Specification<User>
-        {
-            public ByRoles(string[] role)
-            {
-                Query
-                    .Where(x => role.Contains(x.Role));
-            }
-        }
+        //public class ByRole : Specification<User>
+        //{
+        //    public ByRole(bool[] role)
+        //    {
+        //        Query
+        //            .Where(x => role.Contains(x.IsAdmin))
+        //            .Select(x => new { x.Id, x.UserName, x.IsAdmin });
+        //    }
+        //}
     }
 }

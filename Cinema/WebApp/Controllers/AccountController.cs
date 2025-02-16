@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 public class AccountController : Controller
 {
-    private readonly IUserService _userService;
+    private readonly IUserService _userService; // Сервіс для роботи з користувачами
 
     public AccountController(IUserService userService)
     {
@@ -26,10 +26,8 @@ public class AccountController : Controller
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Surname, model.Email),
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Surname, model.PasswordHash),
-                new Claim(ClaimTypes.Role, user.IsAdmin)
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Hash, user.PasswordHash)
             };
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

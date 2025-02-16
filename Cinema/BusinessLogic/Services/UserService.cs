@@ -27,7 +27,7 @@ namespace BusinessLogic.Services
             {
                 Id = user.Id,
                 UserName = user.UserName,
-                Role = user.Role
+                IsAdmin = user.IsAdmin
             };
         }
         private bool VerifyPassword(string enteredPassword, string storedHash)
@@ -58,15 +58,9 @@ namespace BusinessLogic.Services
             return Mapper.Map<UserDTO>(result);
         }
 
-        public UserDTO GetByRole(string role)
-        {
-            var result = Repository.GetFirstBySpec(new UserSpecification.ByRole(role));
-            return Mapper.Map<UserDTO>(result);
-        }
-        public List<UserDTO> GetByRoles(string[] role)
-        {
-            var result = Repository.GetListBySpec(new UserSpecification.ByRoles(role));
-            return Mapper.Map<List<UserDTO>>(result);
-        }
+        //public List<UserDTO> GetByRole(bool[] role)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
