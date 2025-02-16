@@ -32,10 +32,25 @@ namespace BusinessLogic.Services
             return Mapper.Map<List<ActorDTO>>(result);
         }
 
-        public List<ActorDTO> GetActorsByName(string name)
+        public List<ActorDTO> SearchActorsByName(string name)
         {
-            var result = Repository.GetFirstBySpec(new ActorSpecifications.ByName(name));
+            var result = Repository.GetListBySpec(new ActorSpecifications.ByName(name));
             return Mapper.Map<List<ActorDTO>>(result);
+        }
+        public ActorDTO GetActorByName(string name)
+        {
+            var result = Repository.GetFirstBySpec(new ActorSpecifications.ByNameFulCoincidence(name));
+            return Mapper.Map<ActorDTO>(result);
+        }
+        public List<ActorDTO> GetActorsByNames(string[] names)
+        {
+            var result = Repository.GetListBySpec(new ActorSpecifications.ByNames(names));
+            return Mapper.Map<List<ActorDTO>>(result);
+        }
+        public void Delete(int id) 
+        { 
+            Repository.Delete(id);
+            Repository.Save();
         }
     }
 }

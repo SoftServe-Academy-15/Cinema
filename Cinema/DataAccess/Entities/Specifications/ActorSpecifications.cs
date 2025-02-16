@@ -32,6 +32,28 @@ namespace DataAccess.Entities.Specifications
                     .Include(x => x.Movies);
             }
         }
+        public class ByNames : Specification<Actor>
+        {
+            public ByNames(string[] names)
+            {
+                names = names.ToList().ConvertAll(n => n.ToLower()).ToArray();
+                Query.
+                    Where(x => names.Contains((x.Name + " " + x.Surname).ToLower()))
+                    .Include(x => x.Movies);
+            }
+        }
+        public class ByNameFulCoincidence : Specification<Actor> 
+        {
+            public ByNameFulCoincidence(string name)
+            {
+                Query
+                    .Where(x => (x.Name + " " + x.Surname).ToLower() == name.ToLower())
+                    .Include(x => x.Movies);
+                //Query
+                //    .Where(x => (x.Name + " " + x.Surname).ToLower() == name.ToLower())
+                //    .Include(x => x.Movies);
+            }
+        }
         public class ByMovie : Specification<Actor>
         {
             public ByMovie(int movieId)

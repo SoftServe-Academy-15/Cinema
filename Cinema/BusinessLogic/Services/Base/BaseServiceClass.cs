@@ -17,7 +17,7 @@ namespace BusinessLogic.Services.Base
             Mapper = mapper;
             Repository = repository;  
         }
-        public void Create(T_DTO dto)
+        public virtual void Create(T_DTO dto)
         {
             var value = Mapper.Map<TEntity>(dto);
             Repository.Insert(value);
@@ -27,7 +27,7 @@ namespace BusinessLogic.Services.Base
         public void Delete(T_DTO dto)
         {
             var value = Mapper.Map<TEntity>(dto);
-            Repository.Delete(value);
+            Repository.Delete(value.Id);
             Repository.Save();
         }
 

@@ -1,0 +1,16 @@
+﻿@model BusinessLogic.DTOs.CinemaHallDTO
+@{
+	<form asp-action="Add" id="AddMovieForm" method="post" , style="text-align: center">
+		<div class="formRowContainer">
+			<label asp-for="Places_columns_amount">Columns amount</label>
+			<input asp-for="Places_columns_amount" type="number">
+			<span asp-validation-for="Places_columns_amount"></span>
+		</div>
+		<div class="formRowContainer">
+			<label asp-for="Places_rows_amount">Rows amount</label>
+			<input asp-for="Places_rows_amount" type="number">
+			<span asp-validation-for="Places_rows_amount"></span>
+		</div>
+		<button type="submit">Add</button>
+	</form>
+}

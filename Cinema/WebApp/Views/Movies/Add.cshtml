@@ -1,71 +1,114 @@
-﻿
-@model MovieAddViewModel
+﻿@model MovieAddViewModel
+@{
+	const string imagePlaceholderUrl = "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png";
+}
 <h1>Input movie information</h1>
 <form asp-action="Add" id="AddMovieForm" method="post">
-	@* <div>
+	<div class="formRowContainer">
 		<label asp-for="Movie.Title">Title</label>
-		<input asp-for="Movie.Title">
+		<input asp-for="Movie.Title" id="title">
 		<span asp-validation-for="Movie.Title"></span>
 	</div>
-	<div>
+	<div class="formRowContainer">
 		<label asp-for="Movie.Description">Description</label>
-		<input asp-for="Movie.Description">
+		<textarea id="description"></textarea>
 		<span asp-validation-for="Movie.Description"></span>
 	</div>
-	<div>
+	<div class="formRowContainer">
 		<label asp-for="Movie.Year">Year</label>
-		<input asp-for="Movie.Year" type="number">
+		<input asp-for="Movie.Year" type="number" id="year">
 		<span asp-validation-for="Movie.Year"></span>
 	</div>
-	<div>
+	<div class="formRowContainer">
 		<label asp-for="Movie.Rating">Rating</label>
-		<input asp-for="Movie.Rating" type="number">
+		<input asp-for="Movie.Rating" type="number" id="rating">
 		<span asp-validation-for="Movie.Rating"></span>
 	</div>
-	<div>
+	<div class="formRowContainer">
 		<label asp-for="Movie.TrailerLink">TrailerLink</label>
-		<input asp-for="Movie.TrailerLink" type="url">
+		<input asp-for="Movie.TrailerLink" type="url" id="trailerLink">
 		<span asp-validation-for="Movie.TrailerLink"></span>
 	</div>
-	<div>
+	<div class="formRowContainer">
 		<label asp-for="Movie.ThumbnailLink">ThumbnailLink</label>
-		<input asp-for="Movie.ThumbnailLink" type="url">
+		<input asp-for="Movie.ThumbnailLink" type="url" id="thumbnainLink">
 		<span asp-validation-for="Movie.ThumbnailLink"></span>
-	</div> *@
+	</div>
+	@* hiden input *@
+	<div style="display:none">
+		<input asp-for="GenreString" type="hidden" id="genreString">
+		<input asp-for="ActorNameString" type="hidden" id="actorNameString">
+		<input asp-for="RoleNameString" type="hidden" id="roleNameString">
+		<input asp-for="MainRoleString" type="hidden" id="mainRoleString">
+		<input asp-for="Movie.Description" id="descriptionString">
+	</div>
 	<div id="AddingGenreContainer" class="formRowContainer">
 		<label for="Genres" class="formLabel">Genres</label>
-		<div class="GenreListContainer"></div>
-		<span for="Genres"></span>
+		<div class="GenreListContainer">
+		</div>
 		<div class="addingContainer">
-			<div id="AddedGenresContainer">
-			</div>
-			<button id="addGenre" type="button" class="addButton">+</button>
+				<div id="AddedGenresContainer">
+				</div>
+				<button id="addGenre" type="button" class="addButton">+</button>
 		</div>
 		<div id="genreListContainer">
 			@foreach (var genre in Model.Genres)
 			{
-			<button class="genreButton" , id="@genre.GenreName" type="button", action="">@genre.GenreName</button>
+			<button class="genreButton" , id="@genre.GenreName" type="button" action="">@genre.GenreName</button>
 			}
 		</div>
-	</div>
-		<div>
-			<button type="submit">Add</button>
+	</div >
+	<div class="formRowContainer" id="Roles">
+		<div id="roleTable" class="tableContainer" style="grid-template-columns: 1fr 1fr 1fr">
+			<div id="addNewRole" class="tableNode">
+				<div class="inNodeInfo">
+					<button id="addRoleButton" type="button" style="width:80%;height:80%; margin:auto">+</button>
+				</div>
+			</div>
 		</div>
+		<button id="addActorButton" type="button">
+			Add actor
+		</button>
+	</div>
+	<div>
+		<button type="submit" onclick="prepareSubmit()">Add</button>
+	</div>
 </form>
 
+<div id="templates" style="display:none">
+	<div id="actorInfoNodeTemplate">
+		<div class="tableNode">
+			<div class="inNodeInfo">
+				<div style="display: block; text-align: right;">
+					<button type="button" onclick="onRemoveButtonClick(event)">remove</button>
+				</div>
+				<img src=@imagePlaceholderUrl alt="photo" class="nodeImage" />
+				<br />
+				<input type="text" placeholder="actor name" onchange="onActorInputFieldContentChange(event)" id="actorName">
+				<br />
+				<input type="text" placeholder="role name" id="roleName">
+				<br/>
+				<label>Main role</label>
+				<input type="checkbox" id="mainRole">
+			</div>
+		</div>
+	</div>
+</div> 
 @section Scripts
 {
-    <script type="text/javascript">
+	@* add genre script *@
+	<script type="text/javascript">
 		//addGenre button click. It displays genre list. If list is already displayed - it will hede it
-			$("#addGenre").click(function()
-		{
-			if(document.getElementById("genreListContainer").style.display != "inline-block"){
-				document.getElementById("genreListContainer").style.display = "inline-block";
-			}
-			else{
-				document.getElementById("genreListContainer").style.display = "none";
-			}
-		});
+				$("#addGenre").click(function()
+			{
+				if(document.getElementById("genreListContainer").style.display != "inline-block"){
+					document.getElementById("genreListContainer").style.display = "inline-block";
+				}
+				else{
+					document.getElementById("genreListContainer").style.display = "none";
+				}
+			});
+
 		//Supposed, that elements is already sorted in alphabetic order
 		function appendChildInAlphabeticOrder(parentElement, childElement){
 			if( parentElement.childElementCount == 0 ||
@@ -86,7 +129,7 @@
 		var genreButtons = document.getElementsByClassName("genreButton");
 		//Add genre to genre list
 		for(var i = 0; i < genreButtons.length; i++){
-			genreButtons[i].addEventListener("click", 
+			genreButtons[i].addEventListener("click",
 			function (e){
 				if(e.target.parentElement.id == "genreListContainer")
 				{
@@ -98,5 +141,75 @@
 				}
 			});
 		}
+	</script>
+
+	@* Role window script *@
+	<script type="text/javascript">
+		function onRemoveButtonClick(e){
+			e.target.parentElement.parentElement.parentElement.parentElement.remove();
+		}
+		function onActorInputFieldContentChange(e){
+			const href = window.origin + '/Actors/GetActorByName/' + e.target.value;
+			const xhr = new XMLHttpRequest();
+			xhr.open("GET", href);	
+			xhr.onload = function(){
+				let responceText = JSON.parse(xhr.responseText);
+				if(responceText != null){
+					e.target.parentElement.querySelector(".nodeImage").src = responceText.photoUrl;
+				}
+			}
+			xhr.send();
+		}
+	</script>
+
+	@*Prepare submit*@
+	<script type="text/javascript">
+		function prepareSubmit(){
+
+			let genresContainer = document.getElementById("AddedGenresContainer");
+			let formRowContainer = document.getElementById("roleTable");
+
+			let genreString = document.getElementById("genreString");
+			let actorNameString = document.getElementById("actorNameString");
+			let roleNameString = document.getElementById("roleNameString");
+			let mainRoleString = document.getElementById("mainRoleString");
+			document.getElementById("descriptionString").value = document.getElementById("description").value;
+
+			genreString.value = "";
+			actorNameString.value = "";
+			roleNameString.value = "";
+			mainRoleString.value = "";
+
+			for(genre of genresContainer.children){
+				genreString.value += (genre.id + ';');
+			}
+
+			for(role of formRowContainer.children){
+				if(role.id != "addNewRole"){
+					actorNameString.value += (role.querySelector("#actorName").value + ';');
+					roleNameString.value += (role.querySelector("#roleName").value + ';');
+					mainRoleString.value += (role.querySelector("#mainRole").checked + ';');
+				}
+			}
+		}
+	</script>
+
+	@* add role button script *@
+    <script type="text/javascript">		
+		//Add role button
+		$("#addRoleButton").click(function(){
+			let template = document.getElementById("templates").querySelector("#actorInfoNodeTemplate");
+			let newNode = template.cloneNode(true);
+			let roleTable = document.getElementById("roleTable");
+			let addRoleButton = roleTable.querySelector("#addNewRole");
+			roleTable.insertBefore(newNode, addRoleButton);
+			newNode.style.display = "block";
+		});
+		//Add actor button
+		$("#addActorButton").click( function(){
+				const href = window.origin + "/Actors/Add";
+				window.open(href).focus();
+		}
+		);
 	</script>
 }
