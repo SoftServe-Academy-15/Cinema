@@ -11,7 +11,7 @@ namespace DataAccess.Entities.Specifications
            public All()
             {
                 Query
-                    .Include(x => x.Genres).Include(x => x.Actors);
+                    .Include(x => x.Genres).Include(x => x.Actors).ThenInclude(x => x.Actor);
             }
         }
         public class ByIds : Specification<Movie>
@@ -20,7 +20,7 @@ namespace DataAccess.Entities.Specifications
             {
                 Query
                     .Where(x => ids.Contains(x.Id))
-                    .Include(x => x.Genres).Include(x => x.Actors);
+                    .Include(x => x.Genres).Include(x => x.Actors).ThenInclude(x => x.Actor);
             }
         }
         public class ById : Specification<Movie>
@@ -29,7 +29,7 @@ namespace DataAccess.Entities.Specifications
             {
                 Query
                     .Where(x => x.Id == id)
-                    .Include(x => x.Genres).Include(x => x.Actors);
+                    .Include(x => x.Genres).Include(x => x.Actors).ThenInclude(x => x.Actor);
             }
         }
         public class ByGenres : Specification<Movie>
@@ -38,7 +38,7 @@ namespace DataAccess.Entities.Specifications
             {
                 Query.
                     Where(x => x.ContainsAllGenres(genres))
-                    .Include(x => x.Genres).Include(x => x.Actors);
+                    .Include(x => x.Genres).Include(x => x.Actors).ThenInclude(x => x.Actor);
             }
         }
         public class ByActors : Specification<Movie>
@@ -47,7 +47,7 @@ namespace DataAccess.Entities.Specifications
             {
                 Query.
                     Where(x => x.ContainsAllActors(actorIds))
-                    .Include(x => x.Genres).Include(x => x.Actors);
+                    .Include(x => x.Genres).Include(x => x.Actors).ThenInclude(x => x.Actor);
             }
         }
         public class ByName : Specification<Movie> 
@@ -56,7 +56,7 @@ namespace DataAccess.Entities.Specifications
             {
                 Query.
                     Where(x => x.Title.ToLower().StartsWith(name.ToLower()))
-                    .Include(x => x.Genres).Include(x => x.Actors);
+                    .Include(x => x.Genres).Include(x => x.Actors).ThenInclude(x => x.Actor);
             }
         }
     }

@@ -1,0 +1,31 @@
+﻿@model BusinessLogic.DTOs.MovieDTO
+@{
+	<h1>@Model.Title</h1>
+	<div style="display:grid; grid-template-columns: 1fr 2fr">
+		<div class="movieInformationLeftBlock">
+			<img src=@Model.ThumbnailLink class="movieInfoImage">
+			<h2>Genres</h2>
+			<div>
+				@foreach(var genre in Model.Genres){
+					<p>@genre.GenreName</p>
+				}
+			</div>
+			<h2 style="display:block">Actors</h2>
+			<div style="display:grid; grid-template-columns: 1fr 1fr">
+				@foreach(var role in Model.Roles){
+					<div>
+						<img src="@role.Actor.PhotoUrl" class="nodeImage">
+						<h3>Role</h3>
+						<h4>@role.Role</h4>
+					</div>
+				}
+			</div>
+		</div>
+		<div class="movieInformationRightBlock">
+			<h2>Description</h2>
+			<p style="color:white">@Model.Description</p>
+			<h2>Trailer</h2>
+			<iframe src="@Model.TrailerLink"></iframe>
+		</div>
+	</div>
+}

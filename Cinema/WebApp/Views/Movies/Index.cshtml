@@ -10,8 +10,16 @@
 					<label>@(@movie.Title)</label>
 					<br />
 					<label>@(@movie.Year)</label>
-				</div>				
+				</div>
+				<button onclick="detailsClick(event)">Details</button>
 			</div>
 		}
 	</div>
+}
+@section Scripts{
+	<script type="text/javascript">
+		function detailsClick(e){
+			window.location.replace(window.origin + "/Movies/Details/" + e.target.parentElement.id);
+		}
+	</script>
 }
