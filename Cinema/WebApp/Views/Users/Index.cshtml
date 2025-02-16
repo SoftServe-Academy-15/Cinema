@@ -7,7 +7,7 @@
 				<br />
 				<label>@(user.Email)</label>
 				<br />
-				<label>@(user.IsAdmin? "Admin" : "User")</label>
+				<label>@(user.Role=="Admin"? "Admin" : "User")</label>
 			</div>
 		}
 	</div>

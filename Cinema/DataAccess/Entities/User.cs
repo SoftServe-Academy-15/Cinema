@@ -9,6 +9,5 @@ namespace DataAccess.Entities
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public string Role { get; set; }
-        public UserRole UserRole { get; set; }
     }
 }

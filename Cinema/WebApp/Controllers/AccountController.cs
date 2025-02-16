@@ -2,6 +2,7 @@
 using BusinessLogic.Interfaces.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -13,8 +14,12 @@ public class AccountController : Controller
     {
         _userService = userService;
     }
-
     public IActionResult Login()
+    {
+        return View();
+    }
+    [HttpGet]
+    public IActionResult AccessDenied()
     {
         return View();
     }
@@ -29,7 +34,7 @@ public class AccountController : Controller
                 new Claim(ClaimTypes.Surname, model.Email),
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.Surname, model.PasswordHash),
-                new Claim(ClaimTypes.Role, user.IsAdmin)
+                new Claim(ClaimTypes.Role, user.Role ?? "User")
             };
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -49,4 +54,11 @@ public async Task<IActionResult> Logout()
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return RedirectToAction("Login");
     }
+
+    [Authorize(Roles = "Admin")]
+    public IActionResult AdminPage()
+    {
+        return View();
+    }
 }
+

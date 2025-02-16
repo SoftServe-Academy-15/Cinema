@@ -25,7 +25,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated && User.Identity.)
+                        @if (User.Identity.IsAuthenticated || User.FindFirst("Role")?.Value == "Admin")
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdminPage">AdminPage</a>
@@ -45,6 +45,11 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Увійти</a>
                             </li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <p>Logged in as: @User.Identity.Name</p>
+                            <p>Role Claim: @User.FindFirst("Role")?.Value</p>
                         }
                     </ul>
                 </div>
