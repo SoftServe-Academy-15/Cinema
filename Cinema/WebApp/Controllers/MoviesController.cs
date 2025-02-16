@@ -25,6 +25,12 @@ namespace WebApp.Controllers
             List<MovieDTO> movies = _movieService.GetAll();
             return View(movies);
         }
+        //GET: /Movies/Details  
+        public IActionResult Details(int id)
+        {
+            MovieDTO mov = _movieService.GetMovieById(id);
+            return View(mov);
+        }
         //GET: /Movies/Add
         public IActionResult Add()
         {
