@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.DTOs;
 using BusinessLogic.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
@@ -18,12 +19,14 @@ namespace WebApp.Controllers
             return View(_service.GetAll());
         }
         //GET: /Halls/Add
+        [Authorize(Roles = "Admin")]
         public IActionResult Add()
         {
             return View();
         }
         //POST: /Halls/Add
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Add(CinemaHallDTO hall)
         {
             if (!ModelState.IsValid) 
