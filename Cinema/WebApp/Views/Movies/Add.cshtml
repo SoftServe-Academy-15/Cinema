@@ -8,7 +8,7 @@
 <form asp-action=@(pageMode== PageModes.Add ? "Add" : "Edit") id="AddMovieForm" method="post">
 	<div class="formRowContainer">
 		<label asp-for="Movie.Title">Title</label>
-		<input asp-for="Movie.Title" id="title">
+		<input asp-for="Movie.Title" id="title" class="form-control" required>
 		<span asp-validation-for="Movie.Title"></span>
 	</div>
 	<div class="formRowContainer">
@@ -18,22 +18,22 @@
 	</div>
 	<div class="formRowContainer">
 		<label asp-for="Movie.Year">Year</label>
-		<input asp-for="Movie.Year" type="number" id="year">
+		<input asp-for="Movie.Year" type="number" id="year" class="form-control" required>
 		<span asp-validation-for="Movie.Year"></span>
 	</div>
 	<div class="formRowContainer">
 		<label asp-for="Movie.Rating">Rating</label>
-		<input asp-for="Movie.Rating" type="number" id="rating">
+		<input asp-for="Movie.Rating" type="number" id="rating" class="form-control" required>
 		<span asp-validation-for="Movie.Rating"></span>
 	</div>
 	<div class="formRowContainer">
 		<label asp-for="Movie.TrailerLink">TrailerLink</label>
-		<input asp-for="Movie.TrailerLink" type="url" id="trailerLink">
+		<input asp-for="Movie.TrailerLink" type="url" id="trailerLink" class="form-control" required>
 		<span asp-validation-for="Movie.TrailerLink"></span>
 	</div>
 	<div class="formRowContainer">
 		<label asp-for="Movie.ThumbnailLink">ThumbnailLink</label>
-		<input asp-for="Movie.ThumbnailLink" type="url" id="thumbnainLink">
+		<input asp-for="Movie.ThumbnailLink" type="url" id="thumbnainLink" class="form-control" required>
 		<span asp-validation-for="Movie.ThumbnailLink"></span>
 	</div>
 	@* hiden input *@
@@ -78,7 +78,7 @@
 			}
 		</div>
 	</div >
-	<div class="formRowContainer" id="Roles">
+	<div class="formRolleContainer" id="Roles">
 		<div id="roleTable" class="tableContainer" style="grid-template-columns: 1fr 1fr 1fr">
 			@foreach(var role in Model.Movie.Roles){
 				<div id="actorInfoNodeTemplate">
@@ -107,7 +107,7 @@
 				</div>
 			</div>
 		</div>
-		<button id="addActorButton" type="button">
+		<button id="addActorButton" type="button" style="margin-bottom: 20px">
 			Add actor
 		</button>
 	</div>
@@ -116,21 +116,20 @@
 	</div>
 </form>
 
-<div id="templates" style="display:none">
+<div id="templates">
 	<div id="actorInfoNodeTemplate">
 		<div class="tableNode">
 			<div class="inNodeInfo">
+				<img src=@imagePlaceholderUrl alt="photo" class="nodeImage" />
+				<input type="text" placeholder="actor name" onchange="onActorInputFieldContentChange(event)" id="actorName">
+				<input type="text" placeholder="role name" id="roleName">
+				<div id="roleBox">
+					<label>Main role</label>
+					<input type="checkbox" id="mainRole">
+				</div>
 				<div style="display: block; text-align: right;">
 					<button type="button" onclick="onRemoveButtonClick(event)">remove</button>
 				</div>
-				<img src=@imagePlaceholderUrl alt="photo" class="nodeImage" />
-				<br />
-				<input type="text" placeholder="actor name" onchange="onActorInputFieldContentChange(event)" id="actorName">
-				<br />
-				<input type="text" placeholder="role name" id="roleName">
-				<br/>
-				<label>Main role</label>
-				<input type="checkbox" id="mainRole">
 			</div>
 		</div>
 	</div>

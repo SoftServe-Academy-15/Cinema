@@ -3,32 +3,32 @@
     const string imagePlaceholderUrl = "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png";
 }
 <h1>Input actor information</h1>
-	<form asp-action="Add" id="AddMovieForm" method="post", style="text-align: center">		
+<form asp-action="Add" id="AddMovieForm" method="post">		
 	<div class="formRowContainer">
 		<label asp-for="Name">Name</label>
-		<input asp-for="Name">
+		<input asp-for="Name" class="form-control" required>
 		<span asp-validation-for="Name"></span>
 	</div>
 	<div class="formRowContainer">
 		<label asp-for="Surname">Surname</label>
-		<input asp-for="Surname">
+		<input asp-for="Surname" class="form-control" required>
 		<span asp-validation-for="Surname"></span>
 	</div>
 	<div class="formRowContainer">
 		<label asp-for="BirthYear">BirthYear</label>
-		<input asp-for="BirthYear" type="number">
+		<input asp-for="BirthYear" type="number" class="form-control" required>
 		<span asp-validation-for="BirthYear"></span>
 	</div>
 	<div class="formRowContainer">
 		<label asp-for="PhotoUrl">PhotoUrl</label>
-		<input asp-for="PhotoUrl" type="url" id="PhotoUrl">
+		<input asp-for="PhotoUrl" type="url" id="PhotoUrl" class="form-control" required>
 		<span asp-validation-for="PhotoUrl"></span>
-	</div >
-	<div class="formRowContainer">
-            <img src="@imagePlaceholderUrl" alt="photo" width="100" id="image" />
 	</div>
-	<div style="margin-top: 5px; margin-bottom: 5px">
-			<button type="submit">Add</button>
+	<div class="formRowContainer">
+			<img id="imgActors" src="@imagePlaceholderUrl" alt="photo" width="100" id="image" />
+	</div>
+	<div>
+			<button type="submit">Add actor</button>
 	</div>
 </form>
 
