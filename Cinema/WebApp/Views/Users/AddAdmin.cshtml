@@ -11,14 +11,14 @@
 
     <div class="formRowContainer">
         <label asp-for="PasswordHash">Password</label>
-        <input asp-for="PasswordHash" id="password" type="password" name="PasswordHash" required>
+        <input asp-for="PasswordHash" id="password" class="form-control" type="password" name="PasswordHash" required>
 		<span asp-validation-for="PasswordHash"></span>
     </div>
 
     <div class="formRowContainer">
         <label>Confirm Password</label>
         <input id="confirmPassword" type="password" required>
-        <span id="passwordError" class="text-danger" style="display:none;">Passwords don`t match</span>
+        <span id="passwordError" class="text-danger" class="form-control" style="display:none;">Passwords don`t match</span>
     </div>
 
     <div class="formRowContainer">

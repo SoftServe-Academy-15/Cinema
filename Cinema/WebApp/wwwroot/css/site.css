@@ -8,42 +8,110 @@ html {
   }
 }
 
+:root {
+    --bg-color: #303030;
+    --text-color: #ffffff;
+    --form-text-color: #303030;
+    --button-color: #0D6EFD;
+    --form-color: whitesmoke;
+}
+
 form {
+    color: var(--form-text-color) !important;
     display: flex;
     align-self: center;
     align-content: center;
-    background-color: aliceblue;
+    /*background-color: aliceblue;*/
     border-color: black;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
     align-items: center;
     align-content: center;
     flex-direction: column;
     flex: 0 1 0;
-    background-color: whitesmoke;
+    background-color: var(--form-color);
     width: 50%;
-    text-align:center;
+    text-align: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.form-control {
+    margin-bottom: 20px;
+    width: 80%;
+    min-width: 200px;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
-h1, h2, h3{
-    text-align:center;
-    color:snow;
+h1, h2, h3 {
+    text-align: center;
+    color: var(--text-color);
+    /*margin-top: 30px;*/
+    margin-bottom: 30px;
 }
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-link {
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+header {
+    color: var(--form-text-color);
+    margin-bottom: 30px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.header-right p {
+    margin: 0;
+    padding: 15px;
+}
+
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    background-image: url('https://img.freepik.com/free-photo/empty-cinema-auditorium-with-chairs_651396-2891.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--text-color);
+    margin-bottom: 60px;
+    background-color: var(--bg-color);
 }
+
 
 #genreListContainer, #AddedGenresContainer {
     height: auto;
-    width:80%;
+    width: 80%;
+    min-width: 150px;
     max-width: 400px;
     margin: 10px;
     padding: 10px;
@@ -76,26 +144,45 @@ body {
     margin-top: auto;
     margin-right: auto;
     margin-bottom: auto;
-    padding: 5px 5px 5px 5px;
+    padding: 5px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.formRolleContainer{
+
+}
+
 .tableContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
-.tableNode{
-    height: 300px;
-    margin: 10px 5px 10px 5px;
-    width: 150px;
-}
+
 .nodeImage{
     width: auto;
     height: auto;
     max-height: 200px;
     max-width: 150px;
 }
-.inNodeInfo{
-    height: 270px;
+.inNodeInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#roleBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom:10px;    
+}
+
+#mainRole{
+    max-width: 12px;
 }
 
 /*Movie info window styles*/
@@ -112,4 +199,106 @@ body {
     width: 100%;
     height: auto;
     display: block;
+}
+
+/*privacy policy*/
+#PrivacyText {
+    color: var(--text-color);
+}
+
+#templates {
+    display: none;
+}
+
+.tableNode {
+    width: 150px;
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.inNodeInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.inNodeInfo img.nodeImage {
+    width: 100px;
+    height: 100px;
+    border-radius: 30%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.inNodeInfo input{
+    width: 80%;
+}
+
+.input-field {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.checkbox-field {
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+button {
+    background-color: var(--button-color);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+label {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+#imgActors{
+    padding-bottom: 20px;
+}
+
+.container-links {
+    padding: 30px 0px;
+    background-color: var(--form-color);
+    display: flex;
+    justify-content: center;
+
+    height: 100vh; 
+}
+
+.links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    max-width: 600px; 
+    gap: 30px; 
+    justify-content: center;
+}
+
+.links a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--button-color, #0D6EFD);
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s;
+    text-align: center;
+    min-width: 120px;
 }
