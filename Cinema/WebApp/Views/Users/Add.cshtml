@@ -1,34 +1,62 @@
 ﻿@model BusinessLogic.DTOs.UserDTO
 
 <h1>Input user information</h1>
-	<form asp-action="Add" id="AddMovieForm" method="post", style="text-align: center">		
-	<div class="formRowContainer">
-		<label asp-for="UserName">Name</label>
-		<input asp-for="UserName">
-		<span asp-validation-for="UserName"></span>
-	</div>
-	<div class="formRowContainer">
-		<label asp-for="PasswordHash">Password</label>
-		<input asp-for="PasswordHash" type="password">
+<form asp-action="Add" id="AddMovieForm" method="post" style="text-align: center" onsubmit="return validatePasswords()">		
+    <div class="formRowContainer">
+        <label asp-for="UserName">Name</label>
+        <input asp-for="UserName">
+        <span asp-validation-for="UserName"></span>
+    </div>
+
+    <div class="formRowContainer">
+        <label asp-for="PasswordHash">Password</label>
+        <input asp-for="PasswordHash" id="password" type="password" name="PasswordHash" required>
 		<span asp-validation-for="PasswordHash"></span>
-	</div>
-	<div class="formRowContainer">
-		<label asp-for="Email">Email</label>
-		<input asp-for="Email" type="email">
-		<span asp-validation-for="Email"></span>
-	</div class="formRowContainer">
-	<div class="formRowContainer">
-	    <label asp-for="Role">Role</label>
-	    <select asp-for="Role" class="form-control">
-	        <option value="User">User</option>
-	        <option value="Admin">Admin</option>
-	    </select>
-	    <span asp-validation-for="Role" class="text-danger"></span>
-	</div>
-	
-	<div style="margin-top: 5px; margin-bottom: 5px">
-			<button type="submit">Add</button>
-	</div>
+    </div>
+
+    <div class="formRowContainer">
+        <label>Confirm Password</label>
+        <input id="confirmPassword" type="password" required>
+        <span id="passwordError" class="text-danger" style="display:none;">Паролі не співпадають</span>
+    </div>
+
+    <div class="formRowContainer">
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" type="email">
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <div class="formRowContainer">
+        <label asp-for="Role">Role</label>
+        <select asp-for="Role" class="form-control">
+            <option value="User">User</option>
+            <option value="Admin">Admin</option>
+        </select>
+    </div>
+
+    <div style="margin-top: 5px; margin-bottom: 5px">
+        <button type="submit">Add</button>
+    </div>
 </form>
+
+
+
+@section Scripts {
+    <script>
+        function validatePasswords() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorSpan = document.getElementById('passwordError');
+
+            if (password !== confirmPassword) {
+                errorSpan.style.display = 'block';
+                return false; 
+            } else {
+                errorSpan.style.display = 'none';
+                return true; 
+            }
+        }
+    </script>
+}
 
 
