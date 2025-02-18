@@ -47,11 +47,6 @@
                                 <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Увійти</a>
                             </li>
                         }
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <p>Username: @User.Identity.Name</p>
-                            <p>Role: @User.FindFirst(ClaimTypes.Role)?.Value</p>
-                        }
 
                     </ul>
                 </div>
