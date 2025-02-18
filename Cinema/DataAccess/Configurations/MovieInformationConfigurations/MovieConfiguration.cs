@@ -8,7 +8,7 @@ namespace DataAccess.Configurations.MovieInformationConfigurations
     {
         public void Configure(EntityTypeBuilder<Movie> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.Id);            
 
             builder.Property(x => x.Title).IsRequired();
 

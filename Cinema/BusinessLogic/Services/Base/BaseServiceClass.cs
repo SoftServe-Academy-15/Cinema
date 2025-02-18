@@ -37,7 +37,7 @@ namespace BusinessLogic.Services.Base
             return Mapper.Map<List<T_DTO>>(result);
         }
 
-        public void Update(T_DTO dto)
+        public virtual void Update(T_DTO dto)
         {
             var value = Mapper.Map<TEntity>(dto);
             Repository.Update(value);
