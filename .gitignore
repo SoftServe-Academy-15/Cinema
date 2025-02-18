@@ -20,3 +20,5 @@
 *.wsuo
 /Cinema/BusinessLogic/obj/Release/net8.0
 /Cinema/WebApp/obj/Release/net8.0
+*.config
+/Cinema/DataAccess/Migrations

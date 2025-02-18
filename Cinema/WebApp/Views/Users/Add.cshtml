@@ -1,22 +1,22 @@
 ﻿@model BusinessLogic.DTOs.UserDTO
 
 <h1>Input user information</h1>
-	<form asp-action="Add" id="AddMovieForm" method="post", style="text-align: center">		
+	<form asp-action="Add" id="AddMovieForm" method="post">		
 	<div class="formRowContainer">
 		<label asp-for="UserName">Name</label>
-		<input asp-for="UserName">
+		<input asp-for="UserName" class="form-control" required>
 		<span asp-validation-for="UserName"></span>
 	</div>
 	<div class="formRowContainer">
 		<label asp-for="PasswordHash">Password</label>
-		<input asp-for="PasswordHash" type="password">
+		<input asp-for="PasswordHash" type="password" class="form-control" required>
 		<span asp-validation-for="PasswordHash"></span>
 	</div>
 	<div class="formRowContainer">
 		<label asp-for="Email">Email</label>
-		<input asp-for="Email" type="email">
+		<input asp-for="Email" type="email" class="form-control" required>
 		<span asp-validation-for="Email"></span>
-	</div class="formRowContainer">
+	</div>
 	<div class="formRowContainer">
 	    <label asp-for="Role">Role</label>
 	    <select asp-for="Role" class="form-control">
@@ -26,8 +26,8 @@
 	    <span asp-validation-for="Role" class="text-danger"></span>
 	</div>
 	
-	<div style="margin-top: 5px; margin-bottom: 5px">
-			<button type="submit">Add</button>
+	<div>
+			<button type="submit" class="btn btn-primary">Add user</button>
 	</div>
 </form>
 
