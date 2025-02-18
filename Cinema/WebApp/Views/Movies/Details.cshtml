@@ -22,10 +22,10 @@
 			<h2 style="display:block">Actors</h2>
 			<div style="display:grid; grid-template-columns: 1fr 1fr">
 				@foreach(var role in Model.Roles){
-					<div>
+					<div >
 						<img src="@role.Actor.PhotoUrl" class="nodeImage">
-						<h3>Role</h3>
-						<h4>@role.Role</h4>
+						<p>@($"{role.Actor.Name} {role.Actor.Surname}")</p>
+						<p>Role : @role.Role</p>
 					</div>
 				}
 			</div>
