@@ -1,10 +1,12 @@
 ﻿@model List<BusinessLogic.DTOs.CinemaHallDTO>
 @{
-	foreach(var hall in Model){
-		<div>
-			<p>hall number: @hall.Id<p/>
-			<p>hall size: @hall.Places_rows_amount rows @hall.Places_columns_amount columns</p>
-		</div>
-	}
+    <div id="hallForm">
+        @foreach (var hall in Model)
+        {
+            <div class="cinema-hall-card">
+                <p>Hall Number: @hall.Id</p>
+                <p>Hall Size: @hall.Places_rows_amount rows, @hall.Places_columns_amount columns</p>
+            </div>
+        }
+    </div>
 }
-z

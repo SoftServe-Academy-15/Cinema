@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -15,6 +15,17 @@ html {
     --button-color: #0D6EFD;
     --form-color: whitesmoke;
 }
+
+#Roles {
+    max-height: 60vh; 
+    overflow-y: auto; 
+}
+form {
+    max-height: calc(100vh - 150px); 
+    overflow-y: auto; 
+    padding-bottom: 20px; 
+}
+
 
 form {
     color: var(--form-text-color) !important;
@@ -98,10 +109,12 @@ html {
 }
 
 body {
-    background-image: url('https://img.freepik.com/free-photo/empty-cinema-auditorium-with-chairs_651396-2891.jpg'); 
-    background-size: cover;
+    background-image: url('https://images.wallpaperscraft.ru/image/single/kresla_krasnyj_riady_152340_300x168.jpg');
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
     color: var(--text-color);
     margin-bottom: 60px;
     background-color: var(--bg-color);
@@ -153,13 +166,19 @@ body {
     align-items: center;
 }
 
-.formRolleContainer{
-
+.formRowContainer textarea {
+    width: 80%;
 }
 
 .tableContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 1000px;
+    margin: auto;
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;*/
 }
 
 .nodeImage{
@@ -173,7 +192,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+   padding-bottom: 10px;
 }
 
 #roleBox {
@@ -219,6 +238,23 @@ body {
     background-color: #f9f9f9;
 }
 
+.tableNodeMovie {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: var(--form-text-color);
+    text-align: center;
+    gap: 10px;
+    width: calc(20% - 10px);
+    min-width: 180px;
+}
+
 .inNodeInfo {
     display: flex;
     flex-direction: column;
@@ -230,9 +266,8 @@ body {
 .inNodeInfo img.nodeImage {
     width: 100px;
     height: 100px;
-    border-radius: 30%;
     object-fit: cover;
-    margin-bottom: 10px;
+    border-radius: 50%;
 }
 
 .inNodeInfo input{
@@ -259,6 +294,7 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
 }
 
 
@@ -301,4 +337,84 @@ label {
     transition: background-color 0.3s ease, transform 0.2s;
     text-align: center;
     min-width: 120px;
+}
+
+#cardButton {
+    display: flex;
+    justify-content: center; 
+    gap: 10px;
+}
+
+
+#userForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; 
+    max-width: 100%; 
+}
+
+.user-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    width: 180px;
+    padding: 15px;
+    border-radius: 12px;
+    background-color: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: none;
+}
+
+    .user-card label {
+        font-size: 14px;
+        color: #555;
+        margin: 5px 0;
+    }
+
+#userForm {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Контейнер для карток */
+#hallForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* Центрує картки по горизонталі */
+}
+
+/* Картка кінотеатру */
+.cinema-hall-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрує вміст картки */
+    justify-content: center;
+    width: 220px;
+    padding: 15px;
+    border-radius: 12px;
+    background-color: #f0f0f0; /* Колір картки (світло-сірий) */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Центрує текст в картці */
+    border: none;
+}
+
+    /* Текст в картці */
+    .cinema-hall-card p {
+        font-size: 14px;
+        color: #555;
+        margin: 5px 0;
+    }
+
+/* Обмежує максимум 5 карток в ряд */
+#hallForm {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    justify-content: center;
 }

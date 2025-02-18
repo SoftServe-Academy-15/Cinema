@@ -3,27 +3,27 @@
 @{
 	<div class="tableContainer">
 		@foreach(var actor in Model){
-			<div class="tableNode", id=@actor.Id>
+			<div class="tableNodeMovie", id=@actor.Id>
 				<div class="inNodeInfo">
 					<img src=@actor.PhotoUrl alt="photo" id="image" class="nodeImage" />
-					<br />
 					<label>@(actor.Name + " " + actor.Surname)</label>
-					<br />
 					<label>@(actor.BirthYear)</label>
 				</div>
-				@if (User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.Role)?.Value == "Admin")
-				{
-					<div style="display:grid; grid-template-columns: 1fr 1fr">
-						<button type="button" onclick="onDetailsButtonClick(event)">Details</button>
-						<button type="button" onclick="onDeleteButtonClick(event)">Delete</button>
-					</div>
-				}
-				else
-				{
-					<div style="display:block; text-align: center">
-						<button type="button" onclick="onDetailsButtonClick(event)">Details</button>
-					</div>
-				}
+				<div id="cardButton">
+					@if (User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.Role)?.Value == "Admin")
+					{
+						<div>
+							<button type="button" onclick="onDetailsButtonClick(event)">Details</button>
+							<button type="button" onclick="onDeleteButtonClick(event)">Delete</button>
+						</div>
+					}
+					else
+					{
+						<div >
+							<button type="button" onclick="onDetailsButtonClick(event)">Details</button>
+						</div>
+					}
+				</div>
 			</div>
 		}
 	</div>
