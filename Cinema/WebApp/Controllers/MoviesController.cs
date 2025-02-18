@@ -1,7 +1,11 @@
-﻿using BusinessLogic.DTOs;
+﻿using System.Security.Claims;
+using BusinessLogic.DTOs;
 using BusinessLogic.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using WebApp.Configurations;
 using WebApp.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebApp.Controllers
 {
@@ -11,13 +15,15 @@ namespace WebApp.Controllers
         private readonly IGenreService _genreService;
         private readonly IActorService _actorService;
         private MovieAddViewModel _model;
+        private IEnumerable<GenreDTO> _genres;
         public MoviesController(IMovieService movieService, IGenreService genreService, IActorService actorService)
         {
             _movieService = movieService;
             _genreService = genreService;
             _actorService = actorService;
+            _genres = _genreService.GetAll();
             _model = new MovieAddViewModel();
-            _model.Genres = _genreService.GetAll();
+            _model.Genres = _genres;
         }
         //GET: /Movies/Index or /Movies
         public IActionResult Index()
@@ -28,49 +34,103 @@ namespace WebApp.Controllers
         //GET: /Movies/Details  
         public IActionResult Details(int id)
         {
-            MovieDTO mov = _movieService.GetMovieById(id);
-            return View(mov);
+            return View(_movieService.GetMovieById(id));
         }
         //GET: /Movies/Add
-        public IActionResult Add()
+        [Route("/Movies/Add")]
+        [Route("/Movies/Edit/{id}")]
+        public IActionResult Add(int id = -1)
         {
-            //RoleDTO role = TempData["R"];
+            string route = (HttpContext.GetEndpoint() as RouteEndpoint).RoutePattern.RawText;
+            if (route.Contains("Movies/Edit/{id}")) 
+            { 
+                _model.Movie = _movieService.GetMovieById(id);
+                PageOpenMode.OpenNextPageInSettingMode(PageModes.Update);
+            }
             return View(_model);
         }
-        //POST: /Movies/Add
+        //POST: /Movies/Edit
         [HttpPost]
+        [Route("/Movies/Edit")]
+        public IActionResult Update(MovieAddViewModel data)
+        {
+            _movieService.Update(ParseData(data, _model.Movie));
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        [Route("/Movies/Add")]
         public IActionResult Add(MovieAddViewModel data)
         {
-            Console.WriteLine(data.GenreString);
-
-            MovieDTO movie = data.Movie;
-
-            string[] genreNames = data.GenreString.Split(';');
-            movie.Genres = _genreService.GetByNames(genreNames);
-
-            movie.Roles = new List<RoleDTO>();
-            string[] actorNames = data.ActorNameString.Split(";");
-            string[] roleNames = data.RoleNameString.Split(";");
-            string[] mainRole = data.MainRoleString.Split(";");
-
-            Console.WriteLine(data.MainRoleString);
-            for (int i = 0; i < actorNames.Length-1; i++)
-            {
-                Console.WriteLine(mainRole[i]);
-                RoleDTO roleDTO = new RoleDTO();
-                roleDTO.ActorId = _actorService.GetActorByName(actorNames[i]).Id;
-                roleDTO.Role = roleNames[i];    
-                roleDTO.IsMainRole = mainRole[i] == "true";
-                movie.Roles.Add(roleDTO);
-            }
-
-            _movieService.Create(movie);
+            _movieService.Create(ParseData(data, _model.Movie));
             return RedirectToAction(nameof(Index));
         }
         [HttpPost]
         public IActionResult AddRole(ActorDTO actor)
         {
             return RedirectToAction("Add");
+        }
+        private MovieDTO ParseData(MovieAddViewModel data, MovieDTO destination)
+        {
+            //Trimming las ';' Without this last element of array after
+            //splitting will be an empty string;
+            destination = data.Movie;
+            if (data.GenreString != null && data.GenreString.Length != 0)
+            {
+                data.GenreString = data.GenreString.TrimEnd(';');
+                string[] genreNames = data.GenreString.Split(';');
+                destination.Genres = _genreService.GetByNames(genreNames);
+            }
+            else
+            {
+                destination.Genres = new List<GenreDTO>();
+            }
+
+            destination.Roles = new List<RoleDTO>();
+
+            if (data.ActorNameString != null && data.ActorNameString.Length != 0)
+            {
+                data.ActorNameString = data.ActorNameString.TrimEnd(';');
+                data.RoleNameString = data.RoleNameString.TrimEnd(';');
+                data.MainRoleString = data.MainRoleString.TrimEnd(';');
+
+                string[] actorNames = data.ActorNameString.Split(";");
+                string[] roleNames = data.RoleNameString.Split(";");
+                string[] mainRole = data.MainRoleString.Split(";");
+
+                for (int i = 0; i < actorNames.Length; i++)
+                {
+                    Console.WriteLine(mainRole[i]);
+                    RoleDTO roleDTO = new RoleDTO();
+                    roleDTO.ActorId = _actorService.GetActorByName(actorNames[i]).Id;
+                    roleDTO.Role = roleNames[i];
+                    roleDTO.IsMainRole = mainRole[i] == "true";
+                    destination.Roles.Add(roleDTO);
+                }
+            }
+            return destination;
+        }
+        [HttpDelete]
+        public ActionResult Delete(int id) 
+        {
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Unauthorized();
+            }
+            if (User.FindFirst(ClaimTypes.Role)?.Value != "Admin")
+            {
+                return Forbid();
+            }
+            var _movieToDelete = _movieService.GetMovieById(id);
+            if (_movieToDelete == null)
+            {
+                return NotFound($"Movie with id={id} not found");
+            }
+            else
+            {
+                _movieService.Delete(_movieToDelete);
+                return Ok();
+            }
         }
     }
 }

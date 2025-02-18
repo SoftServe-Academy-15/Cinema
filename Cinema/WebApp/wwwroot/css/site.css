@@ -60,6 +60,8 @@ body {
 .genreButton {
     margin: 2px 4px 2px 4px;
     padding: 1px 1px 1px 1px;
+    height: 40px;
+    width: fit-content;
 }
 .formLabel {
     display: inline-block;
@@ -100,11 +102,9 @@ body {
 
 /*Movie info window styles*/
 .movieInformationLeftBlock {
-    background-color: darkseagreen;
     margin: 0px;
 }
 .movieInformationRightBlock {
-    background-color: darkslategray;
     margin: 0px 0px 0px 10px;
     padding: 0px 0px 0px 10px;
 }

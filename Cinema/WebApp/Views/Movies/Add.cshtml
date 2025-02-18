@@ -1,9 +1,11 @@
-﻿@model MovieAddViewModel
+﻿@using WebApp.Configurations
+@model MovieAddViewModel
 @{
+	PageModes pageMode = PageOpenMode.DequeueCurrentPageMode();
 	const string imagePlaceholderUrl = "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png";
 }
 <h1>Input movie information</h1>
-<form asp-action="Add" id="AddMovieForm" method="post">
+<form asp-action=@(pageMode== PageModes.Add ? "Add" : "Edit") id="AddMovieForm" method="post">
 	<div class="formRowContainer">
 		<label asp-for="Movie.Title">Title</label>
 		<input asp-for="Movie.Title" id="title">
@@ -11,7 +13,7 @@
 	</div>
 	<div class="formRowContainer">
 		<label asp-for="Movie.Description">Description</label>
-		<textarea id="description"></textarea>
+		<textarea id="description">@Model.Movie.Description</textarea>
 		<span asp-validation-for="Movie.Description"></span>
 	</div>
 	<div class="formRowContainer">
@@ -41,25 +43,64 @@
 		<input asp-for="RoleNameString" type="hidden" id="roleNameString">
 		<input asp-for="MainRoleString" type="hidden" id="mainRoleString">
 		<input asp-for="Movie.Description" id="descriptionString">
+		<input asp-for="Movie.Id" id="movieId">
+		<input type="hidden" id="pageMode" value="@Enum.GetName(typeof(PageModes),pageMode)" />
 	</div>
 	<div id="AddingGenreContainer" class="formRowContainer">
 		<label for="Genres" class="formLabel">Genres</label>
 		<div class="GenreListContainer">
 		</div>
 		<div class="addingContainer">
-				<div id="AddedGenresContainer">
-				</div>
-				<button id="addGenre" type="button" class="addButton">+</button>
+			<div id="AddedGenresContainer">
+				@if (pageMode == PageModes.Update)
+				{
+					@foreach (var genre in Model.Movie.Genres)
+					{
+						<button class="genreButton" id="@genre.GenreName" 
+						type="button" onclick="onGenreButtonClick(event)">
+						@genre.GenreName
+						</button>
+					}
+				}
+			</div>
+			<button id="addGenre" type="button" class="addButton">+</button>
 		</div>
 		<div id="genreListContainer">
 			@foreach (var genre in Model.Genres)
 			{
-			<button class="genreButton" , id="@genre.GenreName" type="button" action="">@genre.GenreName</button>
+				if (!Model.Movie.Genres.Contains(genre))
+				{
+					<button class="genreButton"  id="@genre.GenreName" 
+					type="button" onclick="onGenreButtonClick(event)">
+					@genre.GenreName
+					</button>
+				}
 			}
 		</div>
 	</div >
 	<div class="formRowContainer" id="Roles">
 		<div id="roleTable" class="tableContainer" style="grid-template-columns: 1fr 1fr 1fr">
+			@foreach(var role in Model.Movie.Roles){
+				<div id="actorInfoNodeTemplate">
+					<div class="tableNode">
+						<div class="inNodeInfo">
+							<div style="display: block; text-align: right;">
+								<button type="button" onclick="onRemoveButtonClick(event)">remove</button>
+							</div>
+							<img src=@role.Actor.PhotoUrl alt="photo" class="nodeImage" />
+							<br />
+							<input type="text" placeholder="actor name"
+								   onchange="onActorInputFieldContentChange(event)" id="actorName"
+								   value="@(role.Actor.Name + ' ' + role.Actor.Surname)">
+							<br />
+							<input type="text" placeholder="role name" id="roleName" value="@role.Role">
+							<br />
+							<label>Main role</label>
+							<input type="checkbox" id="mainRole" checked="@role.IsMainRole">
+						</div>
+					</div>
+				</div>
+			}
 			<div id="addNewRole" class="tableNode">
 				<div class="inNodeInfo">
 					<button id="addRoleButton" type="button" style="width:80%;height:80%; margin:auto">+</button>
@@ -71,7 +112,7 @@
 		</button>
 	</div>
 	<div>
-		<button type="submit" onclick="prepareSubmit()">Add</button>
+		<button type="submit" onclick="prepareSubmit()">@(pageMode == PageModes.Add ? "Add" : "Update")</button>
 	</div>
 </form>
 
@@ -96,6 +137,10 @@
 </div> 
 @section Scripts
 {
+	@* global variables *@
+	<script>
+		let pageMode = document.getElementById("pageMode").value;
+	</script>
 	@* add genre script *@
 	<script type="text/javascript">
 		//addGenre button click. It displays genre list. If list is already displayed - it will hede it
@@ -128,18 +173,15 @@
 		}
 		var genreButtons = document.getElementsByClassName("genreButton");
 		//Add genre to genre list
-		for(var i = 0; i < genreButtons.length; i++){
-			genreButtons[i].addEventListener("click",
-			function (e){
-				if(e.target.parentElement.id == "genreListContainer")
-				{
-					appendChildInAlphabeticOrder(document.getElementById("AddedGenresContainer"),e.target);
-				}
-				else
-				{
-					appendChildInAlphabeticOrder(document.getElementById("genreListContainer"),e.target);
-				}
-			});
+		function onGenreButtonClick(e){
+			if(e.target.parentElement.id == "genreListContainer")
+			{
+				appendChildInAlphabeticOrder(document.getElementById("AddedGenresContainer"),e.target);
+			}
+			else
+			{
+				appendChildInAlphabeticOrder(document.getElementById("genreListContainer"),e.target);
+			}
 		}
 	</script>
 
