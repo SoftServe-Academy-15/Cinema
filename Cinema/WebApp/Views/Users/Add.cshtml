@@ -12,14 +12,14 @@
 		<label asp-for="PasswordHash">Password</label>
 		<input asp-for="PasswordHash" id="password" type="password" name="PasswordHash" minlength="8" required
 			   title="Пароль повинен містити принаймні 8 символів.">
-		<span id="passwordErrorLenght" style="color:red;display:none;">Пароль повинен містити принаймні 8 символів.</span>
+		<span id="passwordErrorLenght" style="color:red;display:none;">Password has to be at least 8 characters long</span>
 		<span asp-validation-for="PasswordHash"></span>
 	</div>
 
 	<div class="formRowContainer">
 		<label>Confirm Password</label>
 		<input id="confirmPassword" type="password" required>
-		<span id="passwordError" class="text-danger" style="display:none;">Паролі не співпадають</span>
+		<span id="passwordError" class="text-danger" style="display:none;">Passwords don`t match</span>
 	</div>
 
 	<div class="formRowContainer">

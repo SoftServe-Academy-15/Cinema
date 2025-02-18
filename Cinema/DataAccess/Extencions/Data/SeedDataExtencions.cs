@@ -6,7 +6,12 @@ namespace DataAccess.Extencions.Data
 {
     public static class SeedData
     {
-
+        public static void SeedUserList(this ModelBuilder modelBuilder)
+        {
+            User[] userList = new User[1];
+            userList[0] = new User() { Id = 1, UserName = "admin", Email="Admin", PasswordHash="admin", Role="admin"};
+            modelBuilder.Entity<User>().HasData(userList);
+        }
         public static void SeedGenreList(this ModelBuilder modelBuilder)
         {
             //GenresEnum[] genres = Enum.GetValues(typeof(GenresEnum)).Cast<GenresEnum>().ToArray();
