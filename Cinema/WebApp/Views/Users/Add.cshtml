@@ -4,13 +4,15 @@
 <form asp-action="Add" id="AddMovieForm" method="post" style="text-align: center" onsubmit="return validatePasswords()">
 	<div class="formRowContainer">
 		<label asp-for="UserName">Name</label>
-		<input asp-for="UserName">
+		<input required asp-for="UserName">
 		<span asp-validation-for="UserName"></span>
 	</div>
 
 	<div class="formRowContainer">
 		<label asp-for="PasswordHash">Password</label>
-		<input asp-for="PasswordHash" id="password" type="password" name="PasswordHash" required>
+		<input asp-for="PasswordHash" id="password" type="password" name="PasswordHash" minlength="8" required
+			   title="Пароль повинен містити принаймні 8 символів.">
+		<span id="passwordErrorLenght" style="color:red;display:none;">Пароль повинен містити принаймні 8 символів.</span>
 		<span asp-validation-for="PasswordHash"></span>
 	</div>
 
@@ -22,7 +24,7 @@
 
 	<div class="formRowContainer">
 		<label asp-for="Email">Email</label>
-		<input asp-for="Email" type="email">
+		<input asp-for="Email" required type="email>
 		<span asp-validation-for="Email"></span>
 	</div>
 	<div style="margin-top: 5px; margin-bottom: 5px">

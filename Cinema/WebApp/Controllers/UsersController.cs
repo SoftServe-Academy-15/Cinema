@@ -26,8 +26,8 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult Add(UserDTO user)
         {
-            _userService.Create(user);
             user.Role = "User";
+            _userService.Create(user);
             return View();
         }
         [Authorize(Roles = "Admin")]
