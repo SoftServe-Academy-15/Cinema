@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Security.Claims;
+using System.Web.Http;
 using BusinessLogic.DTOs;
 using BusinessLogic.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -10,39 +11,15 @@ namespace WebApp.Controllers
     public class ActorsController : Controller
     {
         private readonly IActorService _actorService;
-        private ActorManagerModel _actorManagerModel;
 
-        //If true - then in the next Index page invoke page mode will be set to default (View)
-        //Resetting to true each Index call
-        //Set to false before redirecting to Index page, if you changed page mode
-        bool _defaultPageMode = true;
         public ActorsController(IActorService actorService)
         {
             _actorService = actorService;
-            _actorManagerModel = new ActorManagerModel();
         }
         //GET: /Actors
         public IActionResult Index()
         {
-            if (_defaultPageMode)
-                _actorManagerModel.PageMode = ActorManagerPageMode.View;
-            _defaultPageMode = true;
-            _actorManagerModel.Actors = _actorService.GetAll();
-            return View(_actorManagerModel);
-        }
-        //GET: /Actors/Manage
-        public IActionResult Manage()
-        {
-            _defaultPageMode = false;
-            _actorManagerModel.PageMode = ActorManagerPageMode.Manage;
-            return RedirectToAction(nameof(Index));
-        }
-        //GET: /Actors/Select
-        public IActionResult Select()
-        {
-            _defaultPageMode = false;
-            _actorManagerModel.PageMode = ActorManagerPageMode.Select;
-            return RedirectToAction(nameof(Index));
+            return View(_actorService.GetAll());
         }
         //GET: /Actors/GetActorByName/{name}
         [HttpGet]
@@ -81,23 +58,23 @@ namespace WebApp.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
-            try
+            if(!User.Identity.IsAuthenticated)
             {
-                var _actorToDelete = _actorService.GetActorById(id);
-                if (_actorToDelete == null)
-                {
-                    return NotFound($"Actor with id={id} not found");
-                }
-                else
-                {
-                    _actorService.Delete(_actorToDelete);
-                    return Ok();
-                }
+                return Unauthorized();
             }
-            catch (Exception ex)
+            if (User.FindFirst(ClaimTypes.Role)?.Value != "Admin") 
             {
-                Console.WriteLine($"ex.Message: {ex.Message}, ex.Source: {ex.Source}");
-                return new InternalServerErrorResult();
+                return Forbid();
+            }
+            var _actorToDelete = _actorService.GetActorById(id);
+            if (_actorToDelete == null)
+            {
+                return NotFound($"Actor with id={id} not found");
+            }
+            else
+            {
+                _actorService.Delete(_actorToDelete);
+                return Ok();
             }
         }
     }
