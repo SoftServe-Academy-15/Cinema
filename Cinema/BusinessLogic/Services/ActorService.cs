@@ -22,7 +22,7 @@ namespace BusinessLogic.Services
 
         public List<ActorDTO> GetActorsByIds(int[] ids)
         {
-            var result = Repository.GetFirstBySpec(new ActorSpecifications.ByIds(ids));
+            var result = Repository.GetListBySpec(new ActorSpecifications.ByIds(ids));
             return Mapper.Map<List<ActorDTO>>(result);
         }
 
