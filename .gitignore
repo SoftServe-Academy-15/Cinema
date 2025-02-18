@@ -1,0 +1,24 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Cinema/DataAccess/obj
+*.targets
+*.cache
+*.txt
+*.editorconfig
+*.json
+*.props
+/Cinema/WebApp/obj/Debug/net8.0
+/Cinema/BusinessLogic/obj/Debug/net8.0
+/Cinema/WebApp/bin/Debug/net8.0 
+/Cinema/BusinessLogic/bin/Debug/net8.0 
+/Cinema/DataAccess/bin/Debug/net8.0 
+/Cinema/.vs
+*.vsidx
+*.sqlite
+*.wsuo
+/Cinema/BusinessLogic/obj/Release/net8.0
+/Cinema/WebApp/obj/Release/net8.0
+*.config
+/Cinema/DataAccess/Migrations
