@@ -111,11 +111,6 @@ html {
 }
 
 body {
-    background-image: url('https://images.wallpaperscraft.ru/image/single/kresla_krasnyj_riady_152340_300x168.jpg');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     height: 100vh;
     color: var(--text-color);
     margin-bottom: 60px;
@@ -383,37 +378,37 @@ label {
     justify-content: center;
 }
 
-/* Контейнер для карток */
+
 #hallForm {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center; /* Центрує картки по горизонталі */
+    justify-content: center; 
 }
 
-/* Картка кінотеатру */
+
 .cinema-hall-card {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Центрує вміст картки */
+    align-items: center;
     justify-content: center;
     width: 220px;
     padding: 15px;
     border-radius: 12px;
-    background-color: #f0f0f0; /* Колір картки (світло-сірий) */
+    background-color: #f0f0f0; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center; /* Центрує текст в картці */
+    text-align: center; 
     border: none;
 }
 
-    /* Текст в картці */
+
     .cinema-hall-card p {
         font-size: 14px;
         color: #555;
         margin: 5px 0;
     }
 
-/* Обмежує максимум 5 карток в ряд */
+
 #hallForm {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
