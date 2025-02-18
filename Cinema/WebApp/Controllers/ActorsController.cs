@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using BusinessLogic.DTOs;
 using BusinessLogic.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 
@@ -60,12 +61,14 @@ namespace WebApp.Controllers
             return Json(actor);
         }
         //GET: /Actors/Add
+        [Authorize(Roles = "Admin")]
         public IActionResult Add()
         {
             return View();
         }
         //POST: /Actors/Add
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Add(ActorDTO actor)
         {
             actor.Name = actor.Name.Trim();
@@ -75,6 +78,7 @@ namespace WebApp.Controllers
         }
         //Delete: /Actors/Delete/{id}
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             try

@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.DTOs;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
@@ -24,6 +25,13 @@ namespace WebApp.Controllers
 
         [HttpPost]
         public IActionResult Add(UserDTO user)
+        {
+            _userService.Create(user);
+            user.Role = "User";
+            return View();
+        }
+        [Authorize(Roles = "Admin")]
+        public IActionResult AddAdmin(UserDTO user)
         {
             _userService.Create(user);
             return View();

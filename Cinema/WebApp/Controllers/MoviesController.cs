@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.DTOs;
 using BusinessLogic.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 
@@ -32,6 +33,7 @@ namespace WebApp.Controllers
             return View(mov);
         }
         //GET: /Movies/Add
+        [Authorize(Roles = "Admin")]
         public IActionResult Add()
         {
             //RoleDTO role = TempData["R"];
@@ -39,6 +41,7 @@ namespace WebApp.Controllers
         }
         //POST: /Movies/Add
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Add(MovieAddViewModel data)
         {
             Console.WriteLine(data.GenreString);
@@ -68,6 +71,7 @@ namespace WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddRole(ActorDTO actor)
         {
             return RedirectToAction("Add");
