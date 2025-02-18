@@ -1,14 +1,12 @@
 ﻿@model List<BusinessLogic.DTOs.UserDTO>
 @{
-	<div>
+	<div id="userForm">
 		@foreach(var user in Model){
-			<div>
-				<label>@(user.UserName)</label>
-				<br />
-				<label>@(user.Email)</label>
-				<br />
-				<label>@(user.Role=="Admin"? "Admin" : "User")</label>
-			</div>
+            <div class="user-card">
+                <label>@user.UserName</label>
+                <label>@user.Email</label>
+                <label>@((user.Role == "Admin") ? "Admin" : "User")</label>
+            </div>
 		}
 	</div>
 
