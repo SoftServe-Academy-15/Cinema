@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using BusinessLogic.DTOs;
 using BusinessLogic.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApp.Configurations;
@@ -39,6 +40,7 @@ namespace WebApp.Controllers
         //GET: /Movies/Add
         [Route("/Movies/Add")]
         [Route("/Movies/Edit/{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Add(int id = -1)
         {
             string route = (HttpContext.GetEndpoint() as RouteEndpoint).RoutePattern.RawText;
@@ -59,6 +61,7 @@ namespace WebApp.Controllers
         }
         [HttpPost]
         [Route("/Movies/Add")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Add(MovieAddViewModel data)
         {
             _movieService.Create(ParseData(data, _model.Movie));
